@@ -487,59 +487,80 @@ You certainly are not alone finding that long term wealth creation is an area fu
   </footer>
 
   <script>
-    // Preserve original Formspree usage + behavior
-    const USE_FORMSPREE = true;
-    const FORMSPREE_ENDPOINT = "https://formspree.io/f/xzzkkjwd";
+// Updated contact form script — phone number is now compulsory
+// Preserve original Formspree usage + behavior
+const USE_FORMSPREE = true;
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xzzkkjwd";
 
-    (function () {
-      const form = document.getElementById('contactForm');
-      const ok = document.getElementById('contactSuccess');
-      const err = document.getElementById('contactError');
+(function () {
+  const form = document.getElementById('contactForm');
+  const ok = document.getElementById('contactSuccess');
+  const err = document.getElementById('contactError');
 
-      function validEmail(v){ return /.+@.+\..+/.test(v); }
+  function validEmail(v){ return /.+@.+\..+/.test(v); }
+  // basic phone validation: digits, spaces, parentheses, + and - ; at least 7 chars
+  function validPhone(v){ return /^[0-9()+\-\s]{7,}$/.test(v); }
 
-      if (!form) return;
+  if (!form) return;
 
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        if (ok) ok.style.display = 'none';
-        if (err) err.style.display = 'none';
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (ok) ok.style.display = 'none';
+    if (err) {
+      err.style.display = 'none';
+      err.textContent = '';
+    }
 
-        const data = Object.fromEntries(new FormData(form).entries());
-        if (data.website) { return; }
-        if (!data.name || !validEmail(data.email) || !data.message){
-          if (err) {
-            err.textContent = 'Please fill name, a valid email and your message.';
-            err.style.display = 'block';
-          }
-          return;
-        }
+    const data = Object.fromEntries(new FormData(form).entries());
+    // Honeypot
+    if (data.website) { return; }
 
-        try{
-          const res = await fetch(FORMSPREE_ENDPOINT, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              name: data.name,
-              email: data.email,
-              phone: data.phone || '',
-              message: data.message
-            })
-          });
-          if (res.ok){
-            if (ok) {
-              ok.style.display = 'block';
-              form.reset();
-            }
-            return;
-          }
-          throw new Error('Bad status: ' + res.status);
-        }catch(e){
-          console.error(e);
-          if (err) err.style.display = 'block';
-        }
+    // Validate required fields: name, email, phone, message
+    if (!data.name || !validEmail(data.email) || !data.message || !data.phone) {
+      if (err) {
+        err.textContent = 'Please fill name, a valid email, phone number and your message.';
+        err.style.display = 'block';
+      }
+      return;
+    }
+
+    // Additional phone format validation with friendly message
+    if (!validPhone(data.phone.trim())) {
+      if (err) {
+        err.textContent = 'Please enter a valid phone number (digits, spaces, +, -, parentheses; at least 7 characters).';
+        err.style.display = 'block';
+      }
+      return;
+    }
+
+    try{
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          phone: data.phone || '',
+          message: data.message
+        })
       });
-    }());
+      if (res.ok){
+        if (ok) {
+          ok.style.display = 'block';
+          form.reset();
+        }
+        return;
+      }
+      throw new Error('Bad status: ' + res.status);
+    }catch(e){
+      console.error(e);
+      if (err) {
+        err.textContent = 'There was an error sending your message. Please try again later.';
+        err.style.display = 'block';
+      }
+    }
+  });
+})();
 
     // DYNAMIC anchor offset: measure header and set CSS variable --anchor-offset
     (function () {
