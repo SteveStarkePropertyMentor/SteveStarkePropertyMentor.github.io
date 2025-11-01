@@ -41,6 +41,7 @@
     .note { font-size:13px; color:var(--muted); }
     .success { display:none; padding:12px; border:1px solid #d1fae5; background:#ecfdf5; color:#065f46; border-radius:10px; }
     .error { display:none; padding:12px; border:1px solid #fecaca; background:#fef2f2; color:#7f1d1d; border-radius:10px; }
+    .honeypot { display:none; }
   </style>
 </head>
 <body>
@@ -88,8 +89,8 @@
       <div class="card">
         <h3>Contact</h3>
         <p class="small">Have a question or want to book a workshop? Send a message below and Steve will get back to you.</p>
-        <div id="contactSuccess" class="success" style="display:none;">Thanks — your message has been sent.</div>
-        <div id="contactError" class="error" style="display:none;">Sorry, something went wrong. Please email <a href="mailto:steve@propertymentor.co.nz">steve@propertymentor.co.nz</a>.</div>
+        <div id="contactSuccess" class="success">Thanks — your message has been sent.</div>
+        <div id="contactError" class="error">Sorry, something went wrong. Please email <a href="mailto:steve@propertymentor.co.nz">steve@propertymentor.co.nz</a>.</div>
         <form id="contactForm" class="contact" autocomplete="on" novalidate>
           <div class="row">
             <div class="field">
@@ -106,7 +107,7 @@
               <label for="phone">Phone</label>
               <input id="phone" name="phone" type="tel" placeholder="0275-413-061" />
             </div>
-            <div class="field" style="display:none">
+            <div class="field honeypot">
               <label for="website">Website (leave blank)</label>
               <input id="website" name="website" type="text" />
             </div>
