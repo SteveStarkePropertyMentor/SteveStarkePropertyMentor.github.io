@@ -99,6 +99,14 @@ footer {
   margin-top: 28px;
 }
 
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
 .small {
   font-size: 13px;
   color: var(--muted);
