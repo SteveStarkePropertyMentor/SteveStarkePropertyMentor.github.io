@@ -220,6 +220,11 @@ form.contact {
   border-radius: 10px;
 }
 
+/* Honeypot field - hidden for spam protection */
+.field.honeypot {
+  display: none;
+}
+
 /* Responsive styles */
 @media (max-width: 880px) {
   .navlinks {
