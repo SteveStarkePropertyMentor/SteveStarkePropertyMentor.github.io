@@ -331,10 +331,8 @@
   </div>
 
   <script>
-    // Set current year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Basic image error logging to console
     document.querySelectorAll('img').forEach(function(img){
       img.addEventListener('error', function(){
         console.warn('Image failed to load:', img.getAttribute('src'));
