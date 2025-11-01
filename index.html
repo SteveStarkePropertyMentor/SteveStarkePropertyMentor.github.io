@@ -11,6 +11,7 @@
       --muted: #6b7280;
       --bg: #f7fafc;
       --card: #ffffff;
+      --anchor-offset: 120px; /* fallback, overwritten by JS */
     }
     * { box-sizing: border-box; }
     html,body { height: 100%; }
@@ -124,12 +125,9 @@
     /* Page sections */
     section.page-section { margin-top: 36px; }
 
-    /* IMPORTANT: ensure anchored sections (targets) appear below the sticky header
-       so the section heading stays above the fold when navigating to the anchor.
-       Set scroll-margin-top to slightly more than the sticky header height. */
+    /* Use CSS variable for anchor offset so JS can update it dynamically */
     section.page-section {
-      /* header height ≈ image 64px + vertical padding 56px total (28 top + 28 bottom) & some spacing */
-      scroll-margin-top: 120px;
+      scroll-margin-top: var(--anchor-offset);
     }
 
     .section-header {
@@ -208,7 +206,7 @@
   </style>
 </head>
 <body>
-  <header>
+  <header id="site-header">
     <div class="wrap">
       <nav>
         <div class="brand-block">
@@ -440,6 +438,27 @@
           if (err) err.style.display = 'block';
         }
       });
+    }());
+
+    // DYNAMIC anchor offset: measure header and set CSS variable --anchor-offset
+    (function () {
+      const header = document.getElementById('site-header');
+      const setOffset = () => {
+        if (!header) return;
+        // get computed height including margins
+        const rect = header.getBoundingClientRect();
+        // Use header height plus extra breathing room (8px)
+        const offset = Math.ceil(rect.height) + 8;
+        document.documentElement.style.setProperty('--anchor-offset', offset + 'px');
+      };
+      // run on load and on resize (debounced)
+      let t;
+      window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(setOffset, 80); });
+      window.addEventListener('orientationchange', () => { clearTimeout(t); t = setTimeout(setOffset, 120); });
+      // run after fonts/images load (in case header height changes)
+      window.addEventListener('load', setOffset);
+      // also run immediately in case DOM is ready already
+      setOffset();
     }());
   </script>
 </body>
