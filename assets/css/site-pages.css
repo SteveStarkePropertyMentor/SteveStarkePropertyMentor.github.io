@@ -1,0 +1,43 @@
+/* Minimal helper CSS for subpages - responsive stacking and placeholders */
+
+/* Responsive stacking for content rows */
+@media (max-width: 768px) {
+  .content-row {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .content-row.reverse {
+    flex-direction: column !important;
+  }
+}
+
+/* Placeholder styling helpers */
+.placeholder-img {
+  min-height: 180px;
+}
+
+@media (max-width: 480px) {
+  .placeholder-img {
+    height: 160px;
+  }
+  
+  .text-block {
+    padding: 14px;
+  }
+}
+
+/* Contact form responsive improvements */
+@media (max-width: 600px) {
+  .row {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Navigation responsive improvements */
+@media (max-width: 880px) {
+  .brand-block {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
