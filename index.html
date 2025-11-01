@@ -143,8 +143,7 @@
       color: #222;
     }
 
-    /* NEW: green divider line between headings */
-    /* .section-divider is inserted between each section heading visually */
+    /* green divider line between headings */
     .section-divider {
       height: 2px;                 /* line weight = 2px */
       background: var(--accent);   /* green (site accent) */
@@ -179,6 +178,34 @@
       background: rgba(255,255,255,0.02);
     }
 
+    /* About profile specific */
+    .about-block {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      margin: 18px 0 32px;
+      flex-wrap: wrap;
+    }
+    .about-photo {
+      flex: 0 0 320px;
+      max-width: 40%;
+      min-width: 220px;
+    }
+    .about-photo img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid rgba(0,0,0,0.06);
+      background: #fff;
+    }
+    .about-copy {
+      flex: 1 1 420px;
+      min-width: 260px;
+    }
+    .about-copy p { margin-top: 0.6rem; color: #222; line-height: 1.45; }
+
     footer.site-footer {
       padding: 28px 18px;
       background: #fff;
@@ -209,7 +236,12 @@
       .hero { grid-template-columns: 1fr; }
       .navlinks { display: none; }
     }
-    @media (max-width:720px){ .placeholder-row, .text-box-row { flex-direction:column; } .row { grid-template-columns:1fr; } }
+    @media (max-width:720px){
+      .placeholder-row, .text-box-row { flex-direction:column; }
+      .row { grid-template-columns:1fr; }
+      .about-photo { max-width: 100%; flex: 0 0 100%; }
+      .about-copy { flex: 0 0 100%; }
+    }
 
     /* Utility */
     .muted { color: var(--muted); }
@@ -239,7 +271,7 @@
   </header>
 
   <main class="wrap" id="home">
-    <!-- HERO (keeps the exact heading layout from your original) -->
+    <!-- HERO -->
     <section class="hero" aria-labelledby="home-heading">
       <div>
         <div class="card" role="region" aria-labelledby="home-heading">
@@ -297,67 +329,8 @@
       </div>
     </section>
 
-    <!-- ABOUT SECTION -->
-   <!-- ABOUT: headshot + bio — paste into about.html where you want this block to appear -->
-<style>
-  /* Small, non-invasive helper styles for the About headshot & bio block */
-  .about-block {
-    display: flex;
-    gap: 24px;
-    align-items: flex-start;
-    margin: 18px 0 32px;
-    flex-wrap: wrap;
-  }
-  .about-photo {
-    flex: 0 0 320px;
-    max-width: 40%;
-    min-width: 220px;
-  }
-  .about-photo img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 8px;
-    object-fit: cover;
-    border: 1px solid rgba(0,0,0,0.06);
-    background: #fff;
-  }
-  .about-copy {
-    flex: 1 1 420px;
-    min-width: 260px;
-  }
-  .about-copy p { margin-top: 0.6rem; color: #222; line-height: 1.45; }
-  @media (max-width: 720px) {
-    .about-block { gap: 14px; }
-    .about-photo { max-width: 100%; flex: 0 0 100%; }
-    .about-copy { flex: 0 0 100%; }
-  }
-</style>
-
-<section id="about-profile" class="page-section" aria-labelledby="about-heading">
-  <div class="section-header">
-    <h2 id="about-heading">About</h2>
-  </div>
-
-  <div class="about-block card">
-    <div class="about-photo" aria-hidden="false">
-      <!-- Replace the src if you saved the image with a different filename or path -->
-      <img src="/assets/images/steve-about.jpg" alt="Steve Starke headshot">
-    </div>
-
-    <div class="about-copy">
-      <p>With impressive negotiation, coaching, and direct property investment experience, my experience spans financial planning, real estate, personal property acquisition and sales, substantial renovation projects, and more. An astute investor on a personal level, I am equally as comfortable in the commercial sector.</p>
-
-      <p>I have built a strong reputation as an industry mentor, helping others achieve property stability and success, helping budding investors grow their wealth through property to create a secure future for themselves and their families. I live the importance of building foundations for the next generation.</p>
-
-      <p>My down-to-earth and honest approach resonates with my clients. Having worked the hard yards to get where I am today, I have also added academic study to my knowledge base, having achieved a Post Graduate Diploma in Business Administration, and National Certificates in both Financial Advice and Real Estate.</p>
-
-      <p>No longer a Financial Adviser, I am focussed on the most tangible substantial asset you will commonly see and deal with in your life – property. I have extensive coaching experience in class and field spanning some 16+ years across multiple property types.</p>
-
-      <p>A former General Manager and Tutor at PropertyTutors, and former Lead Coach for Steve Goodey Property Coaching, I have the experience, the chops and the tools to help you get to where you need to be.</p>
-    </div>
-  </div>
-</section> <section id="about" class="page-section" aria-labelledby="about-heading">
+    <!-- ABOUT SECTION (with uploaded headshot + full bio inserted) -->
+    <section id="about" class="page-section" aria-labelledby="about-heading">
       <div class="section-header">
         <h2 id="about-heading">About</h2>
         <a class="cta" href="#mentoring">View Mentoring</a>
@@ -369,6 +342,27 @@
       <div class="card" style="margin-bottom:18px;">
         <p class="lead">Replace this text with the About page intro. This layout matches the Home page heading/hero card so the heading spans and styles match exactly.</p>
       </div>
+
+      <!-- ABOUT: headshot + bio -->
+      <div class="about-block card">
+        <div class="about-photo" aria-hidden="false">
+          <!-- Save the uploaded picture as /assets/images/steve-about.jpg in your repo -->
+          <img src="/assets/images/steve-about.jpg" alt="Steve Starke headshot">
+        </div>
+
+        <div class="about-copy">
+          <p>With impressive negotiation, coaching, and direct property investment experience, my experience spans financial planning, real estate, personal property acquisition and sales, substantial renovation projects, and more. An astute investor on a personal level, I am equally as comfortable in the commercial sector.</p>
+
+          <p>I have built a strong reputation as an industry mentor, helping others achieve property stability and success, helping budding investors grow their wealth through property to create a secure future for themselves and their families. I live the importance of building foundations for the next generation.</p>
+
+          <p>My down-to-earth and honest approach resonates with my clients. Having worked the hard yards to get where I am today, I have also added academic study to my knowledge base, having achieved a Post Graduate Diploma in Business Administration, and National Certificates in both Financial Advice and Real Estate.</p>
+
+          <p>No longer a Financial Adviser, I am focussed on the most tangible substantial asset you will commonly see and deal with in your life – property. I have extensive coaching experience in class and field spanning some 16+ years across multiple property types.</p>
+
+          <p>A former General Manager and Tutor at PropertyTutors, and former Lead Coach for Steve Goodey Property Coaching, I have the experience, the chops and the tools to help you get to where you need to be.</p>
+        </div>
+      </div>
+      <!-- end about block -->
 
       <div class="placeholder-row">
         <div class="image-placeholder"><p>Image placeholder 1 — replace with team or office photo</p></div>
@@ -405,7 +399,7 @@
       </div>
     </section>
 
-    <!-- CONTACT SECTION (preserves original form and JS behavior exactly) -->
+    <!-- CONTACT SECTION -->
     <section id="contact" class="page-section" aria-labelledby="contact-heading">
       <div class="section-header">
         <h2 id="contact-heading">Contact</h2>
@@ -421,7 +415,6 @@
         <div id="contactSuccess" class="success">Thanks — your message has been sent.</div>
         <div id="contactError" class="error">Sorry, something went wrong. Please email <a href="mailto:steve@propertymentor.co.nz">steve@propertymentor.co.nz</a>.</div>
 
-        <!-- NOTE: this form keeps the same behavior and posts to the same Formspree endpoint used on the original page -->
         <form id="contactForm" class="contact" autocomplete="on" novalidate>
           <div class="row">
             <div class="field">
@@ -467,7 +460,7 @@
   </footer>
 
   <script>
-    // Preserve original Formspree usage + behavior from provided index
+    // Preserve original Formspree usage + behavior
     const USE_FORMSPREE = true;
     const FORMSPREE_ENDPOINT = "https://formspree.io/f/xzzkkjwd";
 
@@ -486,7 +479,6 @@
         if (err) err.style.display = 'none';
 
         const data = Object.fromEntries(new FormData(form).entries());
-        // honeypot trap
         if (data.website) { return; }
         if (!data.name || !validEmail(data.email) || !data.message){
           if (err) {
@@ -537,8 +529,7 @@
       window.addEventListener('load', setOffset);
       setOffset();
 
-      // OPTIONAL: ensure in-page hash jumps respect the offset on navigation via links
-      // If user clicks a nav link, we prevent default and smooth-scroll to the target minus header height.
+      // Intercept same-page nav clicks and scroll with the measured offset
       document.querySelectorAll('a[href^="#"]').forEach(a => {
         a.addEventListener('click', (e) => {
           const href = a.getAttribute('href');
@@ -546,12 +537,10 @@
           const targetId = href.slice(1);
           const target = document.getElementById(targetId);
           if (!target) return;
-          // allow normal hash navigation for external/back/forward; intercept clicks to apply offset
           e.preventDefault();
           const computedOffset = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--anchor-offset')) || 120;
           const top = target.getBoundingClientRect().top + window.scrollY - computedOffset;
           window.scrollTo({ top, behavior: 'smooth' });
-          // update the hash without jumping
           history.pushState(null, '', '#' + targetId);
         });
       });
