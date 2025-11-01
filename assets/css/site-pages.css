@@ -5,10 +5,6 @@
   .content-row {
     grid-template-columns: 1fr !important;
   }
-  
-  .content-row.reverse {
-    flex-direction: column !important;
-  }
 }
 
 /* Placeholder styling helpers */
