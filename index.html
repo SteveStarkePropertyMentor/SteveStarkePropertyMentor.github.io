@@ -298,7 +298,66 @@
     </section>
 
     <!-- ABOUT SECTION -->
-    <section id="about" class="page-section" aria-labelledby="about-heading">
+   <!-- ABOUT: headshot + bio — paste into about.html where you want this block to appear -->
+<style>
+  /* Small, non-invasive helper styles for the About headshot & bio block */
+  .about-block {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    margin: 18px 0 32px;
+    flex-wrap: wrap;
+  }
+  .about-photo {
+    flex: 0 0 320px;
+    max-width: 40%;
+    min-width: 220px;
+  }
+  .about-photo img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 1px solid rgba(0,0,0,0.06);
+    background: #fff;
+  }
+  .about-copy {
+    flex: 1 1 420px;
+    min-width: 260px;
+  }
+  .about-copy p { margin-top: 0.6rem; color: #222; line-height: 1.45; }
+  @media (max-width: 720px) {
+    .about-block { gap: 14px; }
+    .about-photo { max-width: 100%; flex: 0 0 100%; }
+    .about-copy { flex: 0 0 100%; }
+  }
+</style>
+
+<section id="about-profile" class="page-section" aria-labelledby="about-heading">
+  <div class="section-header">
+    <h2 id="about-heading">About</h2>
+  </div>
+
+  <div class="about-block card">
+    <div class="about-photo" aria-hidden="false">
+      <!-- Replace the src if you saved the image with a different filename or path -->
+      <img src="/assets/images/steve-about.jpg" alt="Steve Starke headshot">
+    </div>
+
+    <div class="about-copy">
+      <p>With impressive negotiation, coaching, and direct property investment experience, my experience spans financial planning, real estate, personal property acquisition and sales, substantial renovation projects, and more. An astute investor on a personal level, I am equally as comfortable in the commercial sector.</p>
+
+      <p>I have built a strong reputation as an industry mentor, helping others achieve property stability and success, helping budding investors grow their wealth through property to create a secure future for themselves and their families. I live the importance of building foundations for the next generation.</p>
+
+      <p>My down-to-earth and honest approach resonates with my clients. Having worked the hard yards to get where I am today, I have also added academic study to my knowledge base, having achieved a Post Graduate Diploma in Business Administration, and National Certificates in both Financial Advice and Real Estate.</p>
+
+      <p>No longer a Financial Adviser, I am focussed on the most tangible substantial asset you will commonly see and deal with in your life – property. I have extensive coaching experience in class and field spanning some 16+ years across multiple property types.</p>
+
+      <p>A former General Manager and Tutor at PropertyTutors, and former Lead Coach for Steve Goodey Property Coaching, I have the experience, the chops and the tools to help you get to where you need to be.</p>
+    </div>
+  </div>
+</section> <section id="about" class="page-section" aria-labelledby="about-heading">
       <div class="section-header">
         <h2 id="about-heading">About</h2>
         <a class="cta" href="#mentoring">View Mentoring</a>
