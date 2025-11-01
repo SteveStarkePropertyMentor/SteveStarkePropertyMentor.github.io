@@ -123,6 +123,15 @@
 
     /* Page sections */
     section.page-section { margin-top: 36px; }
+
+    /* IMPORTANT: ensure anchored sections (targets) appear below the sticky header
+       so the section heading stays above the fold when navigating to the anchor.
+       Set scroll-margin-top to slightly more than the sticky header height. */
+    section.page-section {
+      /* header height ≈ image 64px + vertical padding 56px total (28 top + 28 bottom) & some spacing */
+      scroll-margin-top: 120px;
+    }
+
     .section-header {
       margin: 0 0 14px 0;
       display:flex;
@@ -203,7 +212,6 @@
     <div class="wrap">
       <nav>
         <div class="brand-block">
-          <!-- Logo: use the same file/markup you already have -->
           <a href="index.html" aria-label="Property Mentor home" style="display:inline-block">
             <img src="propertymentor_logo.png" alt="Property Mentor Logo">
           </a>
