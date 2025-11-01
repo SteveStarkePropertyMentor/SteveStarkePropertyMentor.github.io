@@ -142,6 +142,17 @@
       font-size: 24px;
       color: #222;
     }
+
+    /* NEW: green divider line between headings */
+    /* .section-divider is inserted between each section heading visually */
+    .section-divider {
+      height: 2px;                 /* line weight = 2px */
+      background: var(--accent);   /* green (site accent) */
+      margin: 18px 0 22px 0;       /* spacing around divider */
+      border-radius: 2px;
+      width: 100%;
+    }
+
     .placeholder-row, .text-box-row {
       display:flex;
       gap:1rem;
@@ -268,6 +279,9 @@
         <a class="cta" href="#contact">Book a call</a>
       </div>
 
+      <!-- divider after section header -->
+      <div class="section-divider" aria-hidden="true"></div>
+
       <div class="card" style="margin-bottom:18px;">
         <p class="lead">Practical, one-to-one mentoring to help you find, finance and manage investment properties in New Zealand.</p>
       </div>
@@ -290,6 +304,9 @@
         <a class="cta" href="#mentoring">View Mentoring</a>
       </div>
 
+      <!-- divider after section header -->
+      <div class="section-divider" aria-hidden="true"></div>
+
       <div class="card" style="margin-bottom:18px;">
         <p class="lead">Replace this text with the About page intro. This layout matches the Home page heading/hero card so the heading spans and styles match exactly.</p>
       </div>
@@ -310,6 +327,9 @@
       <div class="section-header">
         <h2 id="testimonials-heading">Testimonials</h2>
       </div>
+
+      <!-- divider after section header -->
+      <div class="section-divider" aria-hidden="true"></div>
 
       <div class="card" style="margin-bottom:18px;">
         <p class="lead">Read stories from investors who worked with Steve and improved their property decision-making and results.</p>
@@ -332,6 +352,9 @@
         <h2 id="contact-heading">Contact</h2>
         <div class="muted">or email <a href="mailto:steve@propertymentor.co.nz">steve@propertymentor.co.nz</a></div>
       </div>
+
+      <!-- divider after section header -->
+      <div class="section-divider" aria-hidden="true"></div>
 
       <div class="card" style="margin-bottom:18px;">
         <p class="small">Have a question or want to book a workshop? Send a message below and Steve will get back to you.</p>
@@ -445,20 +468,34 @@
       const header = document.getElementById('site-header');
       const setOffset = () => {
         if (!header) return;
-        // get computed height including margins
         const rect = header.getBoundingClientRect();
-        // Use header height plus extra breathing room (8px)
         const offset = Math.ceil(rect.height) + 8;
         document.documentElement.style.setProperty('--anchor-offset', offset + 'px');
       };
-      // run on load and on resize (debounced)
       let t;
       window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(setOffset, 80); });
       window.addEventListener('orientationchange', () => { clearTimeout(t); t = setTimeout(setOffset, 120); });
-      // run after fonts/images load (in case header height changes)
       window.addEventListener('load', setOffset);
-      // also run immediately in case DOM is ready already
       setOffset();
+
+      // OPTIONAL: ensure in-page hash jumps respect the offset on navigation via links
+      // If user clicks a nav link, we prevent default and smooth-scroll to the target minus header height.
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', (e) => {
+          const href = a.getAttribute('href');
+          if (!href || href === '#') return;
+          const targetId = href.slice(1);
+          const target = document.getElementById(targetId);
+          if (!target) return;
+          // allow normal hash navigation for external/back/forward; intercept clicks to apply offset
+          e.preventDefault();
+          const computedOffset = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--anchor-offset')) || 120;
+          const top = target.getBoundingClientRect().top + window.scrollY - computedOffset;
+          window.scrollTo({ top, behavior: 'smooth' });
+          // update the hash without jumping
+          history.pushState(null, '', '#' + targetId);
+        });
+      });
     }());
   </script>
 </body>
