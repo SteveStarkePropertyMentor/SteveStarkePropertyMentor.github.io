@@ -1,573 +1,438 @@
 <!doctype html>
-
 <html lang="en">
-
 <head>
-
   <meta charset="utf-8" />
-
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-
   <title>Property Mentor — Official Website</title>
-
   <meta name="description" content="Property Mentor – Proven expertise and real New Zealand property results for real New Zealand investors."/>
-
   <style>
-
     :root {
-
       --accent: #4CAF50;
-
       --muted: #6b7280;
-
       --bg: #f7fafc;
-
       --card: #ffffff;
-
     }
-
     * { box-sizing: border-box; }
-
+    html,body { height: 100%; }
     body {
-
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial;
-
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
       margin: 0;
-
       color: #111;
-
       background: var(--bg);
-
       -webkit-font-smoothing: antialiased;
-
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-text-size-adjust: 100%;
     }
 
+    /* Header */
     header {
-
       background: #fff;
-
       padding: 28px 18px;
-
       border-bottom: 2px solid var(--accent);
-
+      position: sticky;
+      top: 0;
+      z-index: 40;
     }
-
     .wrap {
-
       max-width: 1100px;
-
       margin: 0 auto;
-
     }
-
     nav {
-
       display: flex;
-
       align-items: center;
-
       justify-content: space-between;
-
       flex-wrap: wrap;
-
+      gap: 12px;
     }
-
     .brand-block {
-
       display: flex;
-
       align-items: center;
-
       gap: 16px;
-
     }
-
     .brand-block img {
-
       height: 64px;
-
+      display: block;
     }
-
     .tagline {
-
       font-size: 14px;
-
       color: var(--muted);
-
       font-weight: 500;
-
     }
-
     .navlinks {
-
       display: flex;
-
       gap: 14px;
-
-    }
-
-    .navlinks a {
-
-      color: var(--accent);
-
-      text-decoration: none;
-
-      padding: 8px 10px;
-
-      border-radius: 8px;
-
-      font-weight: 600;
-
-    }
-
-    .navlinks a:hover {
-
-      background: rgba(76, 175, 80, 0.08);
-
-    }
-
-    main {
-
-      padding: 40px 18px;
-
-    }
-
-    .hero {
-
-      display: grid;
-
-      grid-template-columns: 1fr 420px;
-
-      gap: 28px;
-
       align-items: center;
-
+    }
+    .navlinks a {
+      color: var(--accent);
+      text-decoration: none;
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+    .navlinks a:hover, .navlinks a:focus {
+      background: rgba(76, 175, 80, 0.08);
+      outline: none;
     }
 
+    /* Main layout */
+    main {
+      padding: 40px 18px;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 28px;
+      align-items: start;
+    }
     .card {
-
       background: var(--card);
-
       border-radius: 14px;
-
       padding: 20px;
-
       box-shadow: 0 6px 18px rgba(12,17,26,0.06);
-
     }
 
     h1 {
-
       margin: 0 0 12px 0;
-
       font-size: 32px;
-
       color: #222;
-
+      line-height: 1.05;
     }
-
     p.lead {
-
       color: var(--muted);
-
       margin-top: 0;
-
       font-size: 16px;
-
     }
-
     .cta {
-
       display: inline-block;
-
       margin-top: 14px;
-
       padding: 10px 16px;
-
       background: var(--accent);
-
       color: #fff;
-
       border-radius: 10px;
-
       text-decoration: none;
-
       font-weight: 600;
-
     }
 
     .features {
-
       display: grid;
-
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-
       gap: 14px;
-
       margin-top: 22px;
-
     }
 
-    footer {
+    /* Page sections */
+    section.page-section { margin-top: 36px; }
+    .section-header {
+      margin: 0 0 14px 0;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .section-header h2 {
+      margin: 0;
+      font-size: 24px;
+      color: #222;
+    }
+    .placeholder-row, .text-box-row {
+      display:flex;
+      gap:1rem;
+      margin-bottom:1.5rem;
+    }
+    .image-placeholder {
+      flex:1 1 50%;
+      min-height:160px;
+      border:2px dashed rgba(0,0,0,0.08);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:1rem;
+      background:rgba(0,0,0,0.02);
+      box-sizing:border-box;
+      border-radius:8px;
+    }
+    .text-box {
+      flex:1 1 50%;
+      padding:1rem;
+      border:1px solid rgba(0,0,0,0.06);
+      box-sizing:border-box;
+      border-radius:8px;
+      background: rgba(255,255,255,0.02);
+    }
 
+    footer.site-footer {
       padding: 28px 18px;
-
       background: #fff;
-
       border-top: 2px solid var(--accent);
-
       margin-top: 28px;
-
     }
-
     .small {
-
       font-size: 13px;
-
       color: var(--muted);
-
     }
 
-    @media (max-width: 880px) {
-
-      .hero { grid-template-columns: 1fr; }
-
-      .navlinks { display: none; }
-
-    }
-
-
-
-    /* Contact form */
-
+    /* Contact form (same markup & behavior as original) */
     form.contact { display:grid; gap:12px; }
-
     .field { display:flex; flex-direction:column; gap:6px; }
-
     .field label { font-weight:600; font-size:14px; }
-
     .field input, .field textarea { padding:10px 12px; border:1px solid #e5e7eb; border-radius:10px; font-size:15px; }
-
     .field input:focus, .field textarea:focus { outline:2px solid rgba(76,175,80,0.25); border-color: var(--accent); }
-
     .row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-
     .actions { display:flex; gap:10px; align-items:center; }
-
     .btn { display:inline-block; padding:10px 16px; border-radius:10px; text-decoration:none; font-weight:600; }
-
     .btn-primary { background:var(--accent); color:#fff; }
-
     .note { font-size:13px; color:var(--muted); }
-
     .success { display:none; padding:12px; border:1px solid #d1fae5; background:#ecfdf5; color:#065f46; border-radius:10px; }
-
     .error { display:none; padding:12px; border:1px solid #fecaca; background:#fef2f2; color:#7f1d1d; border-radius:10px; }
 
+    /* Responsive */
+    @media (max-width: 880px) {
+      .hero { grid-template-columns: 1fr; }
+      .navlinks { display: none; }
+    }
+    @media (max-width:720px){ .placeholder-row, .text-box-row { flex-direction:column; } .row { grid-template-columns:1fr; } }
+
+    /* Utility */
+    .muted { color: var(--muted); }
+    .sr-only { position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden; }
   </style>
-
 </head>
-
 <body>
-
   <header>
-
     <div class="wrap">
-
       <nav>
-
         <div class="brand-block">
-
-          <img src="propertymentor_logo.png" alt="Property Mentor Logo">
-
+          <!-- Logo: use the same file/markup you already have -->
+          <a href="index.html" aria-label="Property Mentor home" style="display:inline-block">
+            <img src="propertymentor_logo.png" alt="Property Mentor Logo">
+          </a>
           <div class="tagline">Proven expertise – real New Zealand property results for real New Zealand investors</div>
-
         </div>
 
-        <div class="navlinks">
-
+        <div class="navlinks" role="navigation" aria-label="Main">
           <a href="#home">Home</a>
-
-          <a href="#Mentoring">Mentoring</a>
-
+          <a href="#mentoring">Mentoring</a>
           <a href="#about">About</a>
-
+          <a href="#testimonials">Testimonials</a>
           <a href="#contact">Contact</a>
-
-          <a href="#Testimonials">Testimonials</a>
-
         </div>
-
       </nav>
-
     </div>
-
   </header>
 
-
-
-  <main class="wrap">
-
-    <section id="home" class="hero">
-
+  <main class="wrap" id="home">
+    <!-- HERO (keeps the exact heading layout from your original) -->
+    <section class="hero" aria-labelledby="home-heading">
       <div>
-
-        <div class="card">
-
-          <h1>Learn property investing — the practical way</h1>
-
+        <div class="card" role="region" aria-labelledby="home-heading">
+          <h1 id="home-heading">Learn property investing — the practical way</h1>
           <p class="lead">We will workshop property deals with you, provide mentoring and actionable tools to help you find, finance, and improve investment properties. This process will remove uncertainty, create ongoing accuracy and informed, eyes-open confidence, in your property investment decision making.</p>
+          <a class="cta" href="#mentoring">Mentoring</a>
 
-          <a class="cta" href="#courses">Mentoring</a>
-
-
-
-          <div class="features">
-
+          <div class="features" aria-hidden="false">
             <div>
-
               <strong>Free 10 minute strategy call (Limited numbers)</strong>
-
               <p class="small">Taster sessions looking at your resources and their application to key strategies, including buy/hold, buy/flip and many more..</p>
-
             </div>
-
             <div>
-
               <strong>Mentorship</strong>
-
               <p class="small">1:1 support to apply property strategies in your market.</p>
-
             </div>
-
             <div>
-
               <strong>Resources</strong>
-
               <p class="small">Templates, checklists, and legal forms for investors.</p>
-
             </div>
-
             <div>
-
               <strong>Events</strong>
-
               <p class="small">Individual property viewings (online & in-person). Ts and Cs apply.</p>
-
             </div>
-
           </div>
-
         </div>
-
       </div>
 
+      <!-- keep right column empty to preserve original grid & heading alignment -->
+      <div aria-hidden="true"></div>
     </section>
 
+    <!-- MENTORING SECTION -->
+    <section id="mentoring" class="page-section" aria-labelledby="mentoring-heading">
+      <div class="section-header">
+        <h2 id="mentoring-heading">Mentoring</h2>
+        <a class="cta" href="#contact">Book a call</a>
+      </div>
 
+      <div class="card" style="margin-bottom:18px;">
+        <p class="lead">Practical, one-to-one mentoring to help you find, finance and manage investment properties in New Zealand.</p>
+      </div>
 
-    <section id="contact">
+      <div class="placeholder-row" aria-hidden="false">
+        <div class="image-placeholder"><p>Image placeholder 1 — replace with mentoring program photo.</p></div>
+        <div class="image-placeholder"><p>Image placeholder 2 — replace with mentee testimonial photo.</p></div>
+      </div>
 
-      <div class="card">
+      <div class="text-box-row">
+        <div class="text-box"><h3>Mentoring Overview</h3><p>Text box 1 — replace with mentoring program details, structure, pricing, etc.</p></div>
+        <div class="text-box"><h3>How it Works</h3><p>Text box 2 — replace with process, commitments, timings.</p></div>
+      </div>
+    </section>
 
-        <h3>Contact</h3>
+    <!-- ABOUT SECTION -->
+    <section id="about" class="page-section" aria-labelledby="about-heading">
+      <div class="section-header">
+        <h2 id="about-heading">About</h2>
+        <a class="cta" href="#mentoring">View Mentoring</a>
+      </div>
 
+      <div class="card" style="margin-bottom:18px;">
+        <p class="lead">Replace this text with the About page intro. This layout matches the Home page heading/hero card so the heading spans and styles match exactly.</p>
+      </div>
+
+      <div class="placeholder-row">
+        <div class="image-placeholder"><p>Image placeholder 1 — replace with team or office photo</p></div>
+        <div class="image-placeholder"><p>Image placeholder 2 — replace with process diagram</p></div>
+      </div>
+
+      <div class="text-box-row">
+        <div class="text-box"><h3>About Heading 1</h3><p>Text box 1 — replace this paragraph with the actual About page content.</p></div>
+        <div class="text-box"><h3>About Heading 2</h3><p>Text box 2 — replace this paragraph with additional About content.</p></div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section id="testimonials" class="page-section" aria-labelledby="testimonials-heading">
+      <div class="section-header">
+        <h2 id="testimonials-heading">Testimonials</h2>
+      </div>
+
+      <div class="card" style="margin-bottom:18px;">
+        <p class="lead">Read stories from investors who worked with Steve and improved their property decision-making and results.</p>
+      </div>
+
+      <div class="placeholder-row">
+        <div class="image-placeholder"><p>Image placeholder 1 — replace with testimonial portrait or logo</p></div>
+        <div class="image-placeholder"><p>Image placeholder 2 — replace with testimonial portrait or logo</p></div>
+      </div>
+
+      <div class="text-box-row">
+        <div class="text-box"><h3>Client Story 1</h3><p>Text box 1 — add a testimonial quote or summary here.</p></div>
+        <div class="text-box"><h3>Client Story 2</h3><p>Text box 2 — add another testimonial or short case study here.</p></div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION (preserves original form and JS behavior exactly) -->
+    <section id="contact" class="page-section" aria-labelledby="contact-heading">
+      <div class="section-header">
+        <h2 id="contact-heading">Contact</h2>
+        <div class="muted">or email <a href="mailto:steve@propertymentor.co.nz">steve@propertymentor.co.nz</a></div>
+      </div>
+
+      <div class="card" style="margin-bottom:18px;">
         <p class="small">Have a question or want to book a workshop? Send a message below and Steve will get back to you.</p>
 
-
-
         <div id="contactSuccess" class="success">Thanks — your message has been sent.</div>
-
         <div id="contactError" class="error">Sorry, something went wrong. Please email <a href="mailto:steve@propertymentor.co.nz">steve@propertymentor.co.nz</a>.</div>
 
-
-
+        <!-- NOTE: this form keeps the same behavior and posts to the same Formspree endpoint used on the original page -->
         <form id="contactForm" class="contact" autocomplete="on" novalidate>
-
           <div class="row">
-
             <div class="field">
-
               <label for="name">Full name *</label>
-
               <input id="name" name="name" type="text" required placeholder="Jane Doe" />
-
             </div>
-
             <div class="field">
-
               <label for="email">Email *</label>
-
               <input id="email" name="email" type="email" required placeholder="you@example.com" />
-
             </div>
-
           </div>
-
-
 
           <div class="row">
-
             <div class="field">
-
               <label for="phone">Phone</label>
-
               <input id="phone" name="phone" type="tel" placeholder="0275-413-061" />
-
             </div>
-
             <div class="field" style="display:none">
-
               <label for="website">Website (leave blank)</label>
-
               <input id="website" name="website" type="text" />
-
             </div>
-
           </div>
-
-
 
           <div class="field">
-
             <label for="message">Message *</label>
-
             <textarea id="message" name="message" rows="5" required placeholder="Tell us how we can help"></textarea>
-
           </div>
-
-
 
           <div class="actions">
-
             <button class="btn btn-primary" type="submit">Send message</button>
-
             <span class="note">or email <a href="mailto:steve@propertymentor.co.nz">steve@propertymentor.co.nz</a></span>
-
           </div>
-
         </form>
-
       </div>
-
     </section>
-
   </main>
 
-
-
-  <footer>
-
+  <footer class="site-footer">
     <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
-
       <div class="small">© Property Mentor — Proven expertise. Real New Zealand property results.</div>
-
       <div class="small">Built for GitHub Pages • Replace assets with archived copies as needed</div>
-
     </div>
-
   </footer>
 
-
-
   <script>
-
-    // Correct Formspree endpoint provided
-
+    // Preserve original Formspree usage + behavior from provided index
     const USE_FORMSPREE = true;
-
     const FORMSPREE_ENDPOINT = "https://formspree.io/f/xzzkkjwd";
 
+    (function () {
+      const form = document.getElementById('contactForm');
+      const ok = document.getElementById('contactSuccess');
+      const err = document.getElementById('contactError');
 
+      function validEmail(v){ return /.+@.+\..+/.test(v); }
 
-    const form = document.getElementById('contactForm');
+      if (!form) return;
 
-    const ok = document.getElementById('contactSuccess');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (ok) ok.style.display = 'none';
+        if (err) err.style.display = 'none';
 
-    const err = document.getElementById('contactError');
-
-
-
-    function validEmail(v){ return /.+@.+\..+/.test(v); }
-
-
-
-    form.addEventListener('submit', async (e) => {
-
-      e.preventDefault();
-
-      ok.style.display = 'none';
-
-      err.style.display = 'none';
-
-
-
-      const data = Object.fromEntries(new FormData(form).entries());
-
-      // honeypot trap
-
-      if (data.website) { return; }
-
-      if (!data.name || !validEmail(data.email) || !data.message){
-
-        err.textContent = 'Please fill name, a valid email and your message.';
-
-        err.style.display = 'block';
-
-        return;
-
-      }
-
-
-
-      try{
-
-        const res = await fetch(FORMSPREE_ENDPOINT, {
-
-          method: 'POST',
-
-          headers: { 'Content-Type': 'application/json' },
-
-          body: JSON.stringify({
-
-            name: data.name,
-
-            email: data.email,
-
-            phone: data.phone || '',
-
-            message: data.message
-
-          })
-
-        });
-
-        if (res.ok){
-
-          ok.style.display = 'block';
-
-          form.reset();
-
+        const data = Object.fromEntries(new FormData(form).entries());
+        // honeypot trap
+        if (data.website) { return; }
+        if (!data.name || !validEmail(data.email) || !data.message){
+          if (err) {
+            err.textContent = 'Please fill name, a valid email and your message.';
+            err.style.display = 'block';
+          }
           return;
-
         }
 
-        // Formspree often returns 200/201; treat non-ok as error
-
-        throw new Error('Bad status: ' + res.status);
-
-      }catch(e){
-
-        console.error(e);
-
-        err.style.display = 'block';
-
-      }
-
-    });
-
+        try{
+          const res = await fetch(FORMSPREE_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: data.name,
+              email: data.email,
+              phone: data.phone || '',
+              message: data.message
+            })
+          });
+          if (res.ok){
+            if (ok) {
+              ok.style.display = 'block';
+              form.reset();
+            }
+            return;
+          }
+          throw new Error('Bad status: ' + res.status);
+        }catch(e){
+          console.error(e);
+          if (err) err.style.display = 'block';
+        }
+      });
+    }());
   </script>
-
 </body>
-
 </html>
