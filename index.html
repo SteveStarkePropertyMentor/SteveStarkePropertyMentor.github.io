@@ -17,7 +17,7 @@
       --muted: #6b7280;
       --bg: #f7fafc;
       --card: #ffffff;
-      --anchor-offset: 120px; /* fallback, overwritten by JS */
+      --anchor-offset: 120px;
     }
     * { box-sizing: border-box; }
     html,body { height: 100%; }
@@ -31,7 +31,6 @@
       -webkit-text-size-adjust: 100%;
     }
 
-    /* Header */
     header {
       background: #fff;
       padding: 28px 18px;
@@ -83,14 +82,12 @@
       outline: none;
     }
 
-    /* visible focus for keyboard users */
     :focus-visible {
       outline: 3px solid rgba(76,175,80,0.25);
       outline-offset: 2px;
       border-radius: 6px;
     }
 
-    /* Main layout */
     main {
       padding: 40px 18px;
     }
@@ -136,10 +133,8 @@
       margin-top: 22px;
     }
 
-    /* Page sections */
     section.page-section { margin-top: 36px; }
 
-    /* Use CSS variable for anchor offset so JS can update it dynamically */
     section.page-section {
       scroll-margin-top: var(--anchor-offset);
     }
@@ -157,7 +152,6 @@
       color: #222;
     }
 
-    /* green divider line between headings */
     .section-divider {
       height: 2px;
       background: var(--accent);
@@ -202,7 +196,6 @@
       justify-content: flex-start;
     }
 
-    /* Paired rows: ensure image and text match height (legacy) */
     .paired-row {
       display: flex;
       gap: 1rem;
@@ -226,10 +219,6 @@
       display: block;
     }
 
-    /* New "stacked" testimonial layout requested:
-       Part 1 of the Sonya story spans page width (full-width block),
-       then a centered photo row, then part 2 spanning page width.
-       This keeps the section heights and spacing consistent with the rest of the site. */
     .testimonial-stack {
       display: grid;
       grid-template-columns: 1fr;
@@ -256,7 +245,7 @@
     }
     .testimonial-stack .testimonial-photo img {
       width: 100%;
-      max-width: 360px; /* photo size as earlier */
+      max-width: 360px;
       height: auto;
       border-radius: 8px;
       object-fit: cover;
@@ -265,8 +254,6 @@
       background: #fff;
     }
 
-    /* If you prefer to visually separate the two text blocks, we keep subtle padding.
-       On smaller screens everything naturally stacks (same order). */
     @media (max-width: 880px) {
       .hero { grid-template-columns: 1fr; }
       .navlinks { display: none; }
@@ -295,7 +282,6 @@
       .about-copy { flex: 0 0 100%; }
     }
 
-    /* About profile specific */
     .about-block {
       display: flex;
       gap: 24px;
@@ -334,7 +320,6 @@
       color: var(--muted);
     }
 
-    /* Contact form (same markup & behavior as original) */
     form.contact { display:grid; gap:12px; }
     .field { display:flex; flex-direction:column; gap:6px; }
     .field label { font-weight:600; font-size:14px; }
@@ -348,7 +333,6 @@
     .success { display:none; padding:12px; border:1px solid #d1fae5; background:#ecfdf5; color:#065f46; border-radius:10px; }
     .error { display:none; padding:12px; border:1px solid #fecaca; background:#fef2f2; color:#7f1d1d; border-radius:10px; }
 
-    /* Utility */
     .muted { color: var(--muted); }
     .sr-only, .visually-hidden { position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden; }
   </style>
@@ -376,7 +360,6 @@
   </header>
 
   <main class="wrap" id="home">
-    <!-- HERO -->
     <section class="hero" aria-labelledby="home-heading">
       <div>
         <div class="card" role="region" aria-labelledby="home-heading">
@@ -408,7 +391,6 @@
       <div aria-hidden="true"></div>
     </section>
 
-    <!-- MENTORING SECTION -->
     <section id="mentoring" class="page-section" aria-labelledby="mentoring-heading">
       <div class="section-header">
         <h2 id="mentoring-heading">Mentoring</h2>
@@ -421,7 +403,6 @@
         <p class="lead">Practical, one-to-one mentoring to help you find, finance and manage investment properties in New Zealand.</p>
       </div>
 
-      <!-- Paired row: Drive your own life (text) with conquering image to its right -->
       <div class="paired-row" aria-hidden="false">
         <div class="text-box" id="drive-life-box">
           <h3>Drive your own life.</h3>
@@ -434,7 +415,6 @@
         </figure>
       </div>
 
-      <!-- Paired row: family image left, Love Your Future text right -->
       <div class="paired-row" aria-hidden="false">
         <figure class="image-placeholder" aria-hidden="false" style="padding:0.5rem;">
           <img src="family.png" alt="Family in front of a new investment property" class="hero__image" loading="lazy" width="600" height="400">
@@ -455,7 +435,6 @@
 
     </section>
 
-    <!-- ABOUT SECTION (with headshot + full bio inserted) -->
     <section id="about" class="page-section" aria-labelledby="about-heading">
       <div class="section-header">
         <h2 id="about-heading">About</h2>
@@ -468,10 +447,8 @@
         <p class="lead">I've coached with Sean Wood, Grant Hoey, Steve Goodey, Pion Consulting, Wealth Ninja, and other leading NZ Property Brands</p>
       </div>
 
-      <!-- ABOUT: headshot + bio -->
       <div class="about-block card">
         <div class="about-photo" aria-hidden="false">
-          <!-- Updated headshot markup: image is in main branch root as steve-starke-headshot.jpg -->
           <img src="steve-starke-headshot.jpg" alt="Steve Starke headshot" loading="lazy" width="360" height="720">
         </div>
 
@@ -489,7 +466,6 @@
       </div>
     </section>
 
-    <!-- TESTIMONIALS SECTION -->
     <section id="testimonials" class="page-section" aria-labelledby="testimonials-heading">
       <div class="section-header">
         <h2 id="testimonials-heading">Testimonials</h2>
@@ -501,118 +477,74 @@
         <p class="lead">Read stories from investors who worked with Steve and improved their property decision-making and results.</p>
       </div>
 
-      <!-- Requested layout:
-           - Part 1 of the Sonya story spans the page width (full-width text block)
-           - Then the photo is centered on its own row
-           - Then Part 2 spans the page width underneath
-           - A duplicate block follows so you can add two more testimonials; sizes & spacing kept consistent with other sections.
-      -->
+      <!-- Sonya testimonial (matches Jayne's formatting: part1 text, photo centered, part2 text) -->
       <div class="testimonial-stack" aria-hidden="false">
-
-        <!-- Part 1: full-width text -->
         <div class="testimonial-full" id="sonya-part-1">
           <h3>Sonya and Steve</h3>
-
-          <p>I was working for a company and I had an accident and screwed my shoulder up and I couldn't work basically lost my job because of it. Dave brought me home a book on property investing and I sat up one night and read it to about 2 in the morning. And just sometimes there's a there's a something that gets you and this book got me. And I woke him up at 2 in the morning and told him we're doing this right now. So I phoned Steve the next morning, because his number was in the back of the book and Yeah, arranged to meet up.</p>
-
+          <p>I was working for a company and I had an accident and screwed my shoulder up and I couldn't work basically lost my job because of it. Dave brought me home a book on property investing and I sat up one night and read it to about 2 in the morning. And just sometimes there's a there's a something that gets you and this book got me. And I woke him up at 2 in the morning and told him we're doing this right now. So I phoned Steve the next morning, because his number was in the back of the book and arranged to meet up.</p>
           <p>We’d owned two rentals before then we did it all wrong. We didn't know what we were buying. We bought brilliant properties we should have just held, but we had problems because I was trying to manage them and I was too soft on tenants and really got walked over. We had a tinny house was one of them, got completely trashed.</p>
-
           <p>They were both such good yields I think they're just under about a 13% yield. From sheer dumb luck. But we sold them and then did nothing for a while until I read this book and I just was like one of those moments. When you read a book the numbers in a book how much money you can make through properties. So we joined up With Steve and learn how to do it properly.</p>
         </div>
 
-        <!-- Centered photo row -->
         <div class="testimonial-photo" id="sonya-photo">
-          <!-- Replace src with your actual asset name/path. Prefer no spaces in filenames. -->
-          <img src="Sonya and Steve.png" alt="Sonya & Steve" loading="lazy" width="360" height="360">
+          <img src="sonya-and-steve.png" alt="Sonya & Steve" loading="lazy" width="360" height="360">
         </div>
 
-        <!-- Part 2: full-width continuation -->
         <div class="testimonial-full" id="sonya-part-2">
           <p>It’s your basics, its getting your team. It's it's knowing who to ring and to have someone stand there and say, okay yeah, you're doing this right or no, you're doing that wrong. This is how you do it properly and pretty much holding your hand. Steve set us up with a great team.</p>
-
           <p>We learnt the numbers properly meant, what a good deal was, that we had such a good yield. And learnt that you don't actually really want to do it yourself so you want to get someone in there who can manage this properly and that's their job.</p>
-
           <p>And when we weren't sure of a process he corrected us and made sure we did it properly. So there were no mistakes along the way, (we avoided) costly mistakes.</p>
-
-          <p>It's amazing how it changes your mindset once you get into something like this other opportunities come along as well. Okay, not just property, this opens you up to everything else that's out there .Yeah, and so it's changed us hugely, not just now that we have houses and we have Income when we're older, we've got other Investments sitting on there as well that we can pull on.</p>
-
+          <p>It's amazing how it changes your mindset once you get into something like this other opportunities come along as well. Okay, not just property, this opens you up to everything else that's out there. Yeah, and so it's changed us hugely, not just now that we have houses and we have Income when we're older, we've got other Investments sitting on there as well that we can pull on.</p>
           <p>You know, its really good to have someone make sure you're doing it, right? And just make sure you're not gonna fall into the hole and lose everything because it's quite scary when you're starting out, thinking, oh, I could lose my house. But if there's someone sitting there going well actually no you have got it right, because look at this and this and this and add that up, you know, it's gonna work. So it's really nice having that back up.</p>
-
           <p>We both would get on the phone to Steve and and not have questions he'd have different questions than I would And Steve was very patient. Actually, it really is worth every penny because I could have lost a lot of money if we had stepped off that cliff and done it ourselves again. We could have lost a lot of money, but having someone there. I mean my first trade I made my fee plus plus plus back right? So it was it was a no-brainer.</p>
-
           <p>I think if we hadn't taken on a coach we may have done another one or two eventually right one or two trades and then I think our nerves would have just gotten too much. It would have been a bit too scary and you know, you can lose too much money and we can lose the house but having a coach there to say go with these numbers or go with you got instinct and just double checking and ticking and ticking the boxes and adding up everything for you it it's bit of a no-brainer.</p>
-
           <p>And you know what, I wish I'd done it sooner, I wish I'd done it a lot sooner done it in my 20s and 30s instead of starting in my 40s. Which is when we did start because it makes it so much easier the longer you're in this game.</p>
         </div>
-
       </div>
 
-      <!-- Duplicate stacked testimonial beneath so you can add two more (left/top text, image, right/bottom text)
-           Currently placeholders for quick editing.
-           ADDITION: inserted new testimonial block directly under Jayne's first text block (matches Jayne's layout exactly).
-      -->
+      <!-- Jayne testimonial (keeps same formatting) -->
       <div class="testimonial-stack" aria-hidden="false">
         <div class="testimonial-full">
           <h3>Jayne and Jack</h3>
-          <p>I've just had lunch with a couple of girlfriends in Ellerslie and just made my way in here.
-School holidays as well, so I've got the kids keeping me busy too. And just had a couple of weeks in Italy and Croatia. Beautiful, sunny, warm. I've just completed a deal in Mount Wellington, a little two-bedroom brick and tile unit.  Bought, renovated and sold within, it was 14 weeks I think and it paid for the holiday.
-
-We have been working together with Steve since 2009. I was a mother of three young children at the time. I probably had next to no money, monetary, money in the bank, and I'd just been made redundant. I don't know if Steve knew that at the time.
-
-So I had three children under three, I had no money and I was running out of options, so I thought, oh well, I'll go along to this property seminar that Steve was running. And see what they've got to say. <p></p>Well, it just sort of clicked, you know, like I've always been interested in property, always since, you know, forever. And when I went along to the seminar, they were talking about, you know, property trades and holds and so on. It just clicked what they were saying. It just made sense.
-
-I think it was, I can't remember how much it was. It was thousands. It was under 10,000 anyway. And so I didn't have the money but I signed up. And my husband was there with me at the time and he's a builder, so that was handy. And he was a semi-professional rugby player, so he was like on board from the beginning because he's a builder, he understands property. I think I had a property in Wellington to sell first to kind of get some momentum, to get some equity.
-.</p>
-        
+          <p>I've just had lunch with a couple of girlfriends in Ellerslie and just made my way in here. School holidays as well, so I've got the kids keeping me busy too. And just had a couple of weeks in Italy and Croatia. Beautiful, sunny, warm. I've just completed a deal in Mount Wellington, a little two-bedroom brick and tile unit. Bought, renovated and sold within, it was 14 weeks I think and it paid for the holiday.</p>
+          <p>We have been working together with Steve since 2009. I was a mother of three young children at the time. I probably had next to no money in the bank, and I'd just been made redundant. I don't know if Steve knew that at the time.</p>
+          <p>So I had three children under three, I had no money and I was running out of options, so I thought, oh well, I'll go along to this property seminar that Steve was running. And see what they've got to say. Well, it just sort of clicked, you know, like I've always been interested in property. And when I went along to the seminar, they were talking about property trades and holds and so on. It just clicked what they were saying. It just made sense.</p>
+          <p>I think it was, I can't remember how much it was. It was thousands. It was under 10,000 anyway. And so I didn't have the money but I signed up. And my husband was there with me at the time and he's a builder, so that was handy. And he was a semi-professional rugby player, so he was like on board from the beginning because he's a builder, he understands property. I think I had a property in Wellington to sell first to kind of get some momentum, to get some equity.</p>
+        </div>
 
         <div class="testimonial-photo">
-          <img src="Steve and Jayne.png" alt="Steve & Jayne" loading="lazy" width="360" height="360">
+          <img src="steve-and-jayne.png" alt="Steve & Jayne" loading="lazy" width="360" height="360">
         </div>
 
         <div class="testimonial-full">
-          <p>I'd say probably quite slow in the first year but I was probably trading about four or five properties a year after that. And bought some buy and holds in the first year rather than trading. Steve just gave the basics of your sale and purchase agreement, the clauses to use. And then once I put my offers in with due diligence, he'd analyse the deal and say whether it was too high or low or anything that I wouldn't have thought of. It just gave me the confidence to analyse the deals based on the numbers. Really getting to know a market before you kind of initially buy a property and having the confidence to not be overwhelmed by the thousands of money that you're spending. 
-I don't think I would have had the confidence to actually even probably start without a coach because I just didn't have the vision and I didn't realise what property could do for you. And yeah, I mean getting over your fear, getting in the right mindset and pushing through the fear of the big numbers is one thing, but also having the confidence in yourself once you know the market.
-
-My goal for the next two years and five years? Oh, obviously, buy more property. And get myself into a position where I can do that. 
-I firstly would say definitely go along to a seminar because you listen to what you guys have got to say. And the penny will drop. It does make sense.<p>
-
-I mean, people don't think when you first go along and you talk to agents about properties, you listen to the agent. Agents don't always tell you what you need to know. And whereas education through mentoring and coaching gives you the right knowledge. And I think having the right coach, and the right people around you, fast tracks everything.
-
-Consider getting into property investment as a vehicle to create wealth for your future. And the sooner you do it, the better. Because property is a long term game.
-</p>
+          <p>I'd say probably quite slow in the first year but I was probably trading about four or five properties a year after that. And bought some buy and holds in the first year rather than trading. Steve just gave the basics of your sale and purchase agreement, the clauses to use. And then once I put my offers in with due diligence, he'd analyse the deal and say whether it was too high or low or anything that I wouldn't have thought of. It just gave me the confidence to analyse the deals based on the numbers. Really getting to know a market before you kind of initially buy a property and having the confidence to not be overwhelmed by the thousands of money that you're spending.</p>
+          <p>I don't think I would have had the confidence to actually even probably start without a coach because I just didn't have the vision and I didn't realise what property could do for you. And yeah, I mean getting over your fear, getting in the right mindset and pushing through the fear of the big numbers is one thing, but also having the confidence in yourself once you know the market.</p>
+          <p>My goal for the next two years and five years? Oh, obviously, buy more property. And get myself into a position where I can do that. I firstly would say definitely go along to a seminar because you listen to what you guys have got to say. And the penny will drop. It does make sense.</p>
+          <p>I mean, people don't think when you first go along and you talk to agents about properties, you listen to the agent. Agents don't always tell you what you need to know. And whereas education through mentoring and coaching gives you the right knowledge. And I think having the right coach, and the right people around you, fast tracks everything.</p>
+          <p>Consider getting into property investment as a vehicle to create wealth for your future. And the sooner you do it, the better. Because property is a long term game.</p>
         </div>
       </div>
-</div>
 
-        <!-- NEW: inserted testimonial directly under Jayne's block, matching layout exactly -->
+      <!-- Steve & Helen testimonial (formatted to match Jayne's layout) -->
+      <div class="testimonial-stack" aria-hidden="false">
         <div class="testimonial-full">
           <h3>Steve and Helen</h3>
-          <p>"I'm an operations manager for a small goods company, I’ve been there 13 years. 
-We've been working with Steven for 7 years. ay, so tell us about your investing history. Prior to getting involved in the investment property, we're talking so 10 years ago, I was new to the Auckland market. I didn't know anything about Auckland Investing. I knew I wanted to do something, but I didn't quite know what so I went along to Steve for financial advice. He sort of set me on the right path. We talked about investing in property And that sort of got got me underway. So I’ve gone from having just my family home to several investment properties now.
-
-I grew up thinking I needed to save money And I needed to work for my money rather than make my money work for me, so it took me In my inner self to change my thinking to get that value out go Hey, no, I need to make the money work for me. So it was a it was a good mindset change for me. 
-
-We bought the first one in the first 6 months out to three houses in a year. I guess at the beginning Steve's role was to sort of understand my financial position. Yeah, and my appetite for risk To take on debt what sort of investing we wanted to go into yeah Once he understood all that and we decided to go down there, you know the residential property market From there I went into that, you know went into the coaching and learnt of all the basics And I guess you're with like-minded people. From there I got the confidence to actually make the first step.
-
-So going from then, you know, I had to drag my partner and I we both had different views on investing and She wasn't keen and I was quite keen. I think to be fair on the first property we bought I guess I had to take her long kicking and screaming and really holding a hand even to the fact when we signed it over she wasn't a hundred percent sure. But very quickly after that once we've done the first one and definitely by the second one she was really keen and she wanted to go for it. And so yeah, she's converted.
-
-What I've learned along the way with this process is if we're surrounding ourselves by the experts who know them you've got to have faith and those experts and they are experienced in their fields and If I wasn't confident, you know at that time, they gave me a lot of confidence that when I bought the first property. I was nervous but soon realised hey look exactly how we planned it out, we stuck to that plan and it worked. Steves very conservative, and the investments that we've done I think I've probably performed better than what he was predicting in the model. 
-"</p>
-           <div class="testimonial-photo">
-          <img src="Steve and Helen.png" alt="Steve & Steve" loading="lazy" width="360" height="360">
+          <p>I'm an operations manager for a small goods company, I’ve been there 13 years. We've been working with Steve for 7 years. Prior to getting involved in the investment property, I was new to the Auckland market. I didn't know anything about Auckland investing. I knew I wanted to do something, but I didn't quite know what so I went along to Steve for financial advice. He sort of set me on the right path. We talked about investing in property and that sort of got me underway. So I’ve gone from having just my family home to several investment properties now.</p>
+          <p>I grew up thinking I needed to save money and I needed to work for my money rather than make my money work for me, so it took me time to change my thinking to make the money work for me. We bought the first one in the first 6 months out to three houses in a year. At the beginning Steve's role was to understand my financial position and my appetite for risk, to take on debt and what sort of investing we wanted to go into. Once he understood all that we decided to go down that path and I got the confidence to take the first step.</p>
         </div>
-<p>"If we hadn't met Steve and gone through that process we would have probably had our home plus one investment property maybe. If I was in the same position now, what I know now, I would have tripled what I did way back then. We've giving our children guidance now, right we're trying to get them into it Yeah, they're probably just a little bit young at the moment. We’ve set our structures up. So when it’s time for them to invest, well, we know how to safeguard that money for our own children, so it’s all set up.
 
-In terms of property investing, you know the confidence that I've got from the people that I learned, that I was dealing with, definitely would go and look them up and ask for advice. I was looking at property the property model that we were looking at was putting minor dwellings on the back of a right of a larger section. Yeah, I had no idea whether I was allowed to with a water care would let you do it, you know planning rules around all those sort of things so we had to rely on these other people giving us that advice.
-
-We’ve slowed down now because we've sort of maxed our income and our debt ratio Okay, but if the opportunity comes along I'll be into it next week. Initial plans are all, we've achieved all those. As soon as we can free some debt I'll be back into it again. All the hoops that you have to jump through at the start I would have run a mile, but we had professional people leading us through that process giving us a confidence to go through that process We started off in the process and once we started we're away. So I think it's very important.
-It's vital that you get that help. You can't do it on your own. I was a novice and I came from outside of Auckland, so it was actually was vital I got that advice.
- 
-"</p>
+        <div class="testimonial-photo">
+          <img src="steve-and-helen.png" alt="Steve & Helen" loading="lazy" width="360" height="360">
         </div>
+
+        <div class="testimonial-full">
+          <p>Going from then, I had to bring my partner along; she wasn't keen on the first property but very quickly after the first one she was converted and keen to go for it. What I've learned along the way is you need to surround yourself with experts who know their field. If I wasn't confident at the time, the team gave me confidence that when I bought the first property it would work. Steve is conservative and the investments we've done have often performed better than predicted.</p>
+          <p>If we hadn't met Steve we would probably have our home plus one investment property maybe. If I was in the same position now, what I know now, I would have done much more earlier. We've given our children guidance and set up structures so when it's time for them to invest the arrangements are in place. We've slowed down now because we've hit income and debt limits, but if the right opportunity comes along I'll be back into it. The initial hoops are daunting, but with professional people leading you through the process it becomes achievable.</p>
+        </div>
+      </div>
+
     </section>
 
-    <!-- CONTACT SECTION -->
     <section id="contact" class="page-section" aria-labelledby="contact-heading">
       <div class="section-header">
         <h2 id="contact-heading">Contact</h2>
@@ -672,7 +604,6 @@ It's vital that you get that help. You can't do it on your own. I was a novice a
   </footer>
 
   <script>
-  // Contact form config (unchanged)
   const USE_FORMSPREE = true;
   const FORMSPREE_ENDPOINT = "https://formspree.io/f/xzzkkjwd";
 
@@ -742,7 +673,6 @@ It's vital that you get that help. You can't do it on your own. I was a novice a
     });
   })();
 
-  // Anchor offset & smooth scroll (unchanged from previous)
   (function () {
     const header = document.getElementById('site-header');
     const setOffset = () => {
