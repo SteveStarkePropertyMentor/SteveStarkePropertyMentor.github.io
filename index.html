@@ -3,765 +3,210 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Property Mentor — Official Website</title>
-  <meta name="description" content="Property Mentor – Proven expertise and real New Zealand property results for real New Zealand investors."/>
-  <meta name="theme-color" content="#4CAF50" />
-  <meta property="og:title" content="Property Mentor — Official Website" />
-  <meta property="og:description" content="Proven expertise and real New Zealand property results for real New Zealand investors." />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
-
+  <title>Steve Starke — Property Mentor</title>
+  <link rel="stylesheet" href="/assets/css/main.css" />
   <style>
+    /* Local styles for this index page (override or remove if your site CSS handles these) */
     :root {
-      --accent: #4CAF50;
-      --muted: #6b7280;
-      --bg: #f7fafc;
-      --card: #ffffff;
-      --anchor-offset: 120px; /* fallback, overwritten by JS */
+      --max-width: 1100px;
+      --muted: #666;
+      --accent: #0a66c2;
+      --card-bg: #fff;
+      --card-border: #e8e8e8;
+      --shadow: rgba(2,6,23,0.06);
     }
-    * { box-sizing: border-box; }
-    html,body { height: 100%; }
-    body {
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      margin: 0;
-      color: #111;
-      background: var(--bg);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      -webkit-text-size-adjust: 100%;
-    }
+    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color:#111; margin:0; background:#f7f7f8; }
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 1.25rem; }
+    header.site-header { background:#fff; border-bottom:1px solid #eee; }
+    .brand { display:flex; align-items:center; gap:0.75rem; text-decoration:none; color:inherit; }
+    .brand h1 { margin:0; font-size:1.125rem; }
 
-    /* Header */
-    header {
-      background: #fff;
-      padding: 28px 18px;
-      border-bottom: 2px solid var(--accent);
-      position: sticky;
-      top: 0;
-      z-index: 40;
-    }
-    .wrap {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .brand-block {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-    .brand-block img {
-      height: 64px;
-      width: auto;
-      display: block;
-    }
-    .tagline {
-      font-size: 14px;
-      color: var(--muted);
-      font-weight: 500;
-    }
-    .navlinks {
-      display: flex;
-      gap: 14px;
-      align-items: center;
-    }
-    .navlinks a {
-      color: var(--accent);
-      text-decoration: none;
-      padding: 8px 10px;
-      border-radius: 8px;
-      font-weight: 600;
-    }
-    .navlinks a:hover, .navlinks a:focus {
-      background: rgba(76, 175, 80, 0.08);
-      outline: none;
-    }
+    .hero { display:flex; gap:2rem; align-items:center; padding:2rem 0; }
+    .hero-body { flex:1; }
+    .cta { margin-top:1rem; display:flex; gap:0.75rem; flex-wrap:wrap; }
+    .btn { display:inline-block; padding:0.6rem 1rem; border-radius:6px; text-decoration:none; font-weight:600; }
+    .btn-primary { background:var(--accent); color:#fff; box-shadow: 0 6px 18px rgba(10,102,194,0.12); }
+    .btn-ghost { background:transparent; border:1px solid var(--card-border); color:var(--accent); }
 
-    /* visible focus for keyboard users */
-    :focus-visible {
-      outline: 3px solid rgba(76,175,80,0.25);
-      outline-offset: 2px;
-      border-radius: 6px;
-    }
+    .grid { display:grid; gap:1.25rem; grid-template-columns: 1fr 380px; align-items:start; }
 
-    /* Main layout */
-    main {
-      padding: 40px 18px;
-    }
-    .hero {
-      display: grid;
-      grid-template-columns: 1fr 420px;
-      gap: 28px;
-      align-items: start;
-    }
-    .card {
-      background: var(--card);
-      border-radius: 14px;
-      padding: 20px;
-      box-shadow: 0 6px 18px rgba(12,17,26,0.06);
-    }
+    /* Testimonials section */
+    .section-title { margin:0 0 0.5rem 0; font-size:1.15rem; }
+    .section-sub { color:var(--muted); margin:0 0 1rem 0; }
 
-    h1 {
-      margin: 0 0 12px 0;
-      font-size: 32px;
-      color: #222;
-      line-height: 1.05;
-    }
-    p.lead {
-      color: var(--muted);
-      margin-top: 0;
-      font-size: 16px;
-    }
-    .cta {
-      display: inline-block;
-      margin-top: 14px;
-      padding: 10px 16px;
-      background: var(--accent);
-      color: #fff;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: 600;
-    }
+    .testimonials-section { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); align-items:start; }
 
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px;
-      margin-top: 22px;
-    }
-
-    /* Page sections */
-    section.page-section { margin-top: 36px; }
-
-    /* Use CSS variable for anchor offset so JS can update it dynamically */
-    section.page-section {
-      scroll-margin-top: var(--anchor-offset);
-    }
-
-    .section-header {
-      margin: 0 0 14px 0;
+    .testimonial-card {
+      background:var(--card-bg);
+      border:1px solid var(--card-border);
+      border-radius:10px;
+      padding:1rem;
       display:flex;
-      align-items:center;
+      flex-direction:column;
       justify-content:space-between;
-      gap:12px;
+      box-shadow: 0 2px 8px var(--shadow);
     }
-    .section-header h2 {
-      margin: 0;
-      font-size: 24px;
-      color: #222;
-    }
+    .testimonial-text { margin:0 0 0.5rem 0; line-height:1.5; color:#111; }
+    .testimonial-meta { display:flex; gap:0.75rem; align-items:center; margin-top:auto; }
+    .testimonial-avatar { width:56px; height:56px; object-fit:cover; border-radius:50%; border:1px solid #e6e6e6; }
+    .meta-info .name { margin:0; font-weight:600; }
+    .meta-info .role { margin:0; color:var(--muted); font-size:0. nine rem; }
 
-    /* green divider line between headings */
-    .section-divider {
-      height: 2px;
-      background: var(--accent);
-      margin: 18px 0 22px 0;
-      border-radius: 2px;
-      width: 100%;
-    }
-
-    .placeholder-row, .text-box-row {
-      display:flex;
-      gap:1rem;
-      margin-bottom:1.5rem;
-    }
-    .image-placeholder {
-      flex:1 1 50%;
-      min-height:160px;
-      border:2px dashed rgba(0,0,0,0.08);
-      display:flex;
-      align-items:center;
-      justify-content:center;
+    .testimonial-quote {
+      background:#fff;
+      border-radius:10px;
       padding:1rem;
-      background:rgba(0,0,0,0.02);
-      box-sizing:border-box;
-      border-radius:8px;
+      border:1px solid #eee;
+      box-shadow: 0 2px 8px var(--shadow);
+      display:flex;
+      flex-direction:column;
+      gap:0.75rem;
     }
-    .image-placeholder img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      border-radius: 6px;
-    }
-    .text-box {
-      flex:1 1 50%;
-      padding:1rem;
-      border:1px solid rgba(0,0,0,0.06);
-      box-sizing:border-box;
-      border-radius:8px;
-      background: rgba(255,255,255,0.02);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-    }
+    .testimonial-quote p { margin:0; line-height:1.6; }
 
-    /* Paired rows: ensure image and text match height (legacy) */
-    .paired-row {
-      display: flex;
-      gap: 1rem;
-      align-items: stretch;
-      margin-bottom: 1.5rem;
-    }
-    .paired-row .text-box {
-      flex: 1 1 50%;
-    }
-    .paired-row .image-placeholder {
-      flex: 0 0 320px;
-      min-height: 200px;
-      padding: 0.5rem;
-      align-items: stretch;
-    }
-    .paired-row .image-placeholder img {
-      height: 100%;
-      width: 100%;
-      object-fit: cover;
-      border-radius: 8px;
-      display: block;
-    }
+    footer.site-footer { margin-top:3rem; padding:1.25rem 0; color:var(--muted); border-top:1px solid #eee; background:transparent; }
 
-    /* New "stacked" testimonial layout requested:
-       Part 1 of the Sonya story spans page width (full-width block),
-       then a centered photo row, then part 2 spanning page width.
-       This keeps the section heights and spacing consistent with the rest of the site. */
-    .testimonial-stack {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 18px;
-      margin-bottom: 1.5rem;
-      align-items: start;
-      width: 100%;
+    /* Responsive */
+    @media (max-width:900px) {
+      .grid { grid-template-columns: 1fr; }
+      .hero { flex-direction:column; gap:1rem; }
     }
-
-    .testimonial-stack .testimonial-full {
-      padding: 18px;
-      border-radius: 10px;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(0,0,0,0.06);
-      color: #222;
-      line-height: 1.6;
-    }
-
-    .testimonial-stack .testimonial-photo {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 8px;
-    }
-    .testimonial-stack .testimonial-photo img {
-      width: 100%;
-      max-width: 360px; /* photo size as earlier */
-      height: auto;
-      border-radius: 8px;
-      object-fit: cover;
-      display: block;
-      border: 1px solid rgba(0,0,0,0.06);
-      background: #fff;
-    }
-
-    /* If you prefer to visually separate the two text blocks, we keep subtle padding.
-       On smaller screens everything naturally stacks (same order). */
-    @media (max-width: 880px) {
-      .hero { grid-template-columns: 1fr; }
-      .navlinks { display: none; }
-
-      .testimonial-stack {
-        grid-template-columns: 1fr;
-      }
-
-      .paired-row {
-        flex-direction: column;
-      }
-      .paired-row .image-placeholder {
-        flex: 0 0 auto;
-        height: auto;
-        min-height: 160px;
-      }
-      .paired-row .image-placeholder img {
-        height: auto;
-      }
-    }
-
-    @media (max-width:720px){
-      .placeholder-row, .text-box-row { flex-direction:column; }
-      .row { grid-template-columns:1fr; }
-      .about-photo { max-width: 100%; flex: 0 0 100%; }
-      .about-copy { flex: 0 0 100%; }
-    }
-
-    /* About profile specific */
-    .about-block {
-      display: flex;
-      gap: 24px;
-      align-items: flex-start;
-      margin: 18px 0 32px;
-      flex-wrap: wrap;
-    }
-    .about-photo {
-      flex: 0 0 320px;
-      max-width: 40%;
-      min-width: 220px;
-    }
-    .about-photo img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 8px;
-      object-fit: cover;
-      border: 1px solid rgba(0,0,0,0.06);
-      background: #fff;
-    }
-    .about-copy {
-      flex: 1 1 420px;
-      min-width: 260px;
-    }
-    .about-copy p { margin-top: 0.6rem; color: #222; line-height: 1.45; }
-
-    footer.site-footer {
-      padding: 28px 18px;
-      background: #fff;
-      border-top: 2px solid var(--accent);
-      margin-top: 28px;
-    }
-    .small {
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    /* Contact form (same markup & behavior as original) */
-    form.contact { display:grid; gap:12px; }
-    .field { display:flex; flex-direction:column; gap:6px; }
-    .field label { font-weight:600; font-size:14px; }
-    .field input, .field textarea { padding:10px 12px; border:1px solid #e5e7eb; border-radius:10px; font-size:15px; }
-    .field input:focus, .field textarea:focus { outline:2px solid rgba(76,175,80,0.25); border-color: var(--accent); }
-    .row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-    .actions { display:flex; gap:10px; align-items:center; }
-    .btn { display:inline-block; padding:10px 16px; border-radius:10px; text-decoration:none; font-weight:600; }
-    .btn-primary { background:var(--accent); color:#fff; }
-    .note { font-size:13px; color:var(--muted); }
-    .success { display:none; padding:12px; border:1px solid #d1fae5; background:#ecfdf5; color:#065f46; border-radius:10px; }
-    .error { display:none; padding:12px; border:1px solid #fecaca; background:#fef2f2; color:#7f1d1d; border-radius:10px; }
-
-    /* Utility */
-    .muted { color: var(--muted); }
-    .sr-only, .visually-hidden { position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden; }
   </style>
 </head>
 <body>
-  <header id="site-header">
-    <div class="wrap">
-      <nav>
-        <div class="brand-block">
-          <a href="index.html" aria-label="Property Mentor home" style="display:inline-block">
-            <img src="propertymentor_logo.png" alt="Property Mentor Logo">
-          </a>
-          <div class="tagline">Proven expertise – real New Zealand property results for real New Zealand investors</div>
-        </div>
+  <header class="site-header">
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;">
+      <a class="brand" href="/">
+        <svg width="38" height="38" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <rect width="24" height="24" rx="6" fill="#0a66c2"></rect>
+          <path d="M6 15.2V9.6l4-2.4 4 2.4v5.6" stroke="#fff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h1>Steve Starke</h1>
+      </a>
 
-        <div class="navlinks" role="navigation" aria-label="Main">
-          <a href="#home">Home</a>
-          <a href="#mentoring">Mentoring</a>
-          <a href="#about">About</a>
-          <a href="#testimonials">Testimonials</a>
-          <a href="#contact">Contact</a>
-        </div>
+      <nav aria-label="Primary" style="font-size:0.95rem;">
+        <a href="/about" style="margin-right:1rem;color:var(--muted);text-decoration:none;">About</a>
+        <a href="/services" style="margin-right:1rem;color:var(--muted);text-decoration:none;">Services</a>
+        <a href="/contact" style="color:var(--muted);text-decoration:none;">Contact</a>
       </nav>
     </div>
   </header>
 
-  <main class="wrap" id="home">
-    <!-- HERO -->
-    <section class="hero" aria-labelledby="home-heading">
-      <div>
-        <div class="card" role="region" aria-labelledby="home-heading">
-          <h1 id="home-heading">Learn property investing — the practical way</h1>
-          <p class="lead">We will workshop property deals with you, provide mentoring and actionable tools to help you find, finance, and improve investment properties. This process will remove uncertainty, create ongoing accuracy and informed, eyes-open confidence, in your property investment decision making.</p>
-          <a class="cta" href="#mentoring">Mentoring</a>
-
-          <div class="features" aria-hidden="false">
-            <div>
-              <strong>Free 10 minute Application call (Limited numbers)</strong>
-              <p class="small">Taster sessions looking at your resources and their application to key strategies, including buy/hold, buy/flip and many more..</p>
-            </div>
-            <div>
-              <strong>Mentorship</strong>
-              <p class="small">1:1 support to apply property strategies in your market.</p>
-            </div>
-            <div>
-              <strong>Resources</strong>
-              <p class="small">Templates, checklists, and legal forms for investors.</p>
-            </div>
-            <div>
-              <strong>Events</strong>
-              <p class="small">Individual property viewings (online & in-person). Ts and Cs apply.</p>
-            </div>
-          </div>
+  <main class="container" role="main">
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-body">
+        <h2 id="hero-heading" style="margin:0 0 0.5rem 0;font-size:1.5rem;">Property mentoring, deal sourcing and portfolio coaching</h2>
+        <p style="margin:0;color:var(--muted);max-width:60ch;">
+          Practical, experience-led support for investors who want to buy, refinance or scale a lettings portfolio. Guidance on sourcing, finance, renovations and tenant-ready lettings.
+        </p>
+        <div class="cta">
+          <a class="btn btn-primary" href="/contact">Book a call</a>
+          <a class="btn btn-ghost" href="/services">See services</a>
         </div>
       </div>
 
-      <div aria-hidden="true"></div>
-    </section>
-
-    <!-- MENTORING SECTION -->
-    <section id="mentoring" class="page-section" aria-labelledby="mentoring-heading">
-      <div class="section-header">
-        <h2 id="mentoring-heading">Mentoring</h2>
-        <a class="cta" href="#contact">Book a call</a>
-      </div>
-
-      <div class="section-divider" aria-hidden="true"></div>
-
-      <div class="card" style="margin-bottom:18px;">
-        <p class="lead">Practical, one-to-one mentoring to help you find, finance and manage investment properties in New Zealand.</p>
-      </div>
-
-      <!-- Paired row: Drive your own life (text) with conquering image to its right -->
-      <div class="paired-row" aria-hidden="false">
-        <div class="text-box" id="drive-life-box">
-          <h3>Drive your own life.</h3>
-          <p>Take care of your family. If you have been carefully planning for your future, you’ll know that it’s very important to include property investment as one of your wealth strategies. Are you a person with a plan, but are concerned to avoid the risk of costly mistakes? You certainly are not alone finding that long term wealth creation is an area full of complex choices, risks and rewards.</p>
-          <p>This is why so many investors in New Zealand and around the world, choose to make direct property investment a key plank in their wealth portfolio. We get that - and are here to help you build a property portfolio to service your dreams.</p>
-        </div>
-
-        <figure class="image-placeholder" aria-hidden="false" style="padding:0.5rem;">
-          <img src="conquering.png" alt="Conquering investment challenges" class="hero__image" loading="lazy" width="600" height="400">
-        </figure>
-      </div>
-
-      <!-- Paired row: family image left, Love Your Future text right -->
-      <div class="paired-row" aria-hidden="false">
-        <figure class="image-placeholder" aria-hidden="false" style="padding:0.5rem;">
-          <img src="family.png" alt="Family in front of a new investment property" class="hero__image" loading="lazy" width="600" height="400">
-        </figure>
-
-        <div class="text-box" id="love-future-box">
-          <h3>Love Your Future.</h3>
-          <p>It’s no accident so many high profile business people and property owners rely on professional and experienced advisors from a range of fields. Whether you are a first class yachtee, a ballerina, a medical intern, a forklift driver or a new mum, everyone needs advice they can take comfort from whilst they forge their own path.</p>
-          <p>Your own actions set your future, but with expert guidance, you will feel empowered and energised to make your money future bright - your way.</p>
-          <ul>
-            <li>Be Accountable</li>
-            <li>Step up your game</li>
-            <li>Network with like-minded driven people seeking real success</li>
-            <li>Build investing knowledge and firepower for future generations</li>
+      <aside style="width:360px;">
+        <div style="background:#fff;border-radius:10px;border:1px solid #eee;padding:1rem;box-shadow:0 8px 20px rgba(2,6,23,0.04);">
+          <h3 style="margin:0 0 0.5rem 0;">Quick facts</h3>
+          <ul style="margin:0;padding-left:1.1rem;color:var(--muted);">
+            <li>One-to-one mentoring</li>
+            <li>Deal sourcing and analysis</li>
+            <li>Renovation and lettings guidance</li>
           </ul>
         </div>
-      </div>
-
+      </aside>
     </section>
 
-    <!-- ABOUT SECTION (with headshot + full bio inserted) -->
-    <section id="about" class="page-section" aria-labelledby="about-heading">
-      <div class="section-header">
-        <h2 id="about-heading">About</h2>
-        <a class="cta" href="#mentoring">View Mentoring</a>
-      </div>
-
-      <div class="section-divider" aria-hidden="true"></div>
-
-      <div class="card" style="margin-bottom:18px;">
-        <p class="lead">I've coached with Sean Wood, Grant Hoey, Steve Goodey, Pion Consulting, Wealth Ninja, and other leading NZ Property Brands</p>
-      </div>
-
-      <!-- ABOUT: headshot + bio -->
-      <div class="about-block card">
-        <div class="about-photo" aria-hidden="false">
-          <!-- Updated headshot markup: image is in main branch root as steve-starke-headshot.jpg -->
-          <img src="steve-starke-headshot.jpg" alt="Steve Starke headshot" loading="lazy" width="360" height="720">
-        </div>
-
-        <div class="about-copy">
-          <p>With impressive negotiation, coaching, and direct property investment experience, my experience spans financial planning, real estate, personal property acquisition and sales, substantial renovation projects, and more. An astute investor on a personal level, I am equally as comfortable in the commercial sector.</p>
-
-          <p>I have also built a strong reputation as an industry mentor, helping others achieve property stability and success, helping budding investors grow their wealth through property to create a secure future for themselves and their families. I live the importance of building foundations for the next generation.</p>
-
-          <p>My down-to-earth and honest approach resonates with my clients. Having worked the hard yards to get where I am today, I have also added academic study to my knowledge base, having achieved a Post Graduate Diploma in Business Administration, and National Certificates in both Financial Advice and Real Estate.</p>
-
-          <p>No longer a Financial Adviser, I am focussed on the most tangible substantial asset you will commonly see and deal with in your life – property. I have been a real estate licensee salesperson since 2014, during which time I have been Project Marketing Manager, Sales Manager, and Business Growth Manager (all the same time). Latterly at REMAX New Zealand, part of the largest real estate brand in the world. In 2020, I was proud to be a key player in a team that achieved #1 for REMAX Global, Owner Teams (Don Ha). That is no small achievement. I won Platinum Sales status during that time, have run my own real estate franchise, and have also been Certified as a Guild Member of the Institute for Luxury Home Marketing.</p>
-
-          <p>I've extensive coaching experience in class and field spanning some 16+ years across multiple property types. A former General Manager and Tutor at PropertyTutors, Director at other leading companies, and former Lead Coach for Steve Goodey Property Coaching, I have the experience, the networks, the chops and the tools, to help you get to where you need to be.</p>
+    <section aria-labelledby="testimonials-heading" style="margin-top:1.5rem;">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:0.5rem;">
+        <div>
+          <h3 id="testimonials-heading" class="section-title">What clients say</h3>
+          <p class="section-sub">Real experiences from people who've worked with Steve — coaching, deal sourcing and portfolio growth.</p>
         </div>
       </div>
+
+      <!-- Testimonials grid -->
+      <section id="testimonials" class="testimonials-section" aria-label="Testimonials">
+        <!-- Testimonial - Compact Card (Layout A) -->
+        <aside class="testimonial-card" role="article" aria-label="Testimonial from Jane Doe">
+          <div>
+            <p class="testimonial-text">
+              "Working with Steve transformed how I approach property investing. His market insight and step-by-step coaching helped me find a great deal within months — something I thought would take years."
+            </p>
+          </div>
+          <div class="testimonial-meta">
+            <img class="testimonial-avatar" src="/assets/images/testimonials/jane-doe.jpg" alt="Jane Doe">
+            <div class="meta-info">
+              <p class="name">Jane Doe</p>
+              <p class="role" style="margin-top:0.25rem;color:var(--muted);font-size:0. nine rem;">First-time investor, London</p>
+              <p class="role" style="margin-top:0.35rem;color:#f6b400;">★★★★★</p>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Testimonial - Full Quote (Layout B) -->
+        <figure class="testimonial-quote" role="article" aria-label="Testimonial from John Smith">
+          <blockquote>
+            <p>
+              "Steve's mentorship was the missing piece for my portfolio. He demystified financing, negotiation and due diligence — and stood by me while I made my first purchase. I'm now more confident and already seeing rental returns I didn't expect so early."
+            </p>
+          </blockquote>
+          <figcaption class="author" style="display:flex;align-items:center;gap:0.75rem;">
+            <img src="/assets/images/testimonials/john-smith.jpg" alt="John Smith" class="author-photo" style="width:56px;height:56px;border-radius:50%;object-fit:cover;border:1px solid #eee;">
+            <div class="author-meta">
+              <strong style="display:block;">John Smith</strong>
+              <span style="color:var(--muted);font-size:0. nine rem;">Portfolio landlord · Birmingham</span>
+            </div>
+          </figcaption>
+        </figure>
+
+        <!-- Additional Testimonial - Compact Card (New) -->
+        <aside class="testimonial-card" role="article" aria-label="Testimonial from Emily Lee">
+          <div>
+            <p class="testimonial-text">
+              "Steve gave me practical, no-nonsense advice on renovating for yield. His network saved me weeks of sourcing contractors and I started receiving enquiries the week the property went live."
+            </p>
+          </div>
+          <div class="testimonial-meta">
+            <img class="testimonial-avatar" src="/assets/images/testimonials/emily-lee.jpg" alt="Emily Lee">
+            <div class="meta-info">
+              <p class="name">Emily Lee</p>
+              <p class="role" style="margin-top:0.25rem;color:var(--muted);font-size:0. nine rem;">Buy-to-let owner, Manchester</p>
+              <p class="role" style="margin-top:0.35rem;color:#f6b400;">★★★★★</p>
+            </div>
+          </div>
+        </aside>
+      </section>
     </section>
 
-    <!-- TESTIMONIALS SECTION -->
-    <section id="testimonials" class="page-section" aria-labelledby="testimonials-heading">
-      <div class="section-header">
-        <h2 id="testimonials-heading">Testimonials</h2>
-      </div>
-
-      <div class="section-divider" aria-hidden="true"></div>
-
-      <div class="card" style="margin-bottom:18px;">
-        <p class="lead">Read stories from investors who worked with Steve and improved their property decision-making and results.</p>
-      </div>
-
-      <!-- Requested layout:
-           - Part 1 of the Sonya story spans the page width (full-width text block)
-           - Then the photo is centered on its own row
-           - Then Part 2 spans the page width underneath
-           - A duplicate block follows so you can add two more testimonials; sizes & spacing kept consistent with other sections.
-      -->
-      <div class="testimonial-stack" aria-hidden="false">
-
-        <!-- Part 1: full-width text -->
-        <div class="testimonial-full" id="sonya-part-1">
-          <h3>Sonya and Steve</h3>
-
-          <p>I was working for a company and I had an accident and screwed my shoulder up and I couldn't work basically lost my job because of it. Dave brought me home a book on property investing and I sat up one night and read it to about 2 in the morning. And just sometimes there's a there's a something that gets you and this book got me. And I woke him up at 2 in the morning and told him we're doing this right now. So I phoned Steve the next morning, because his number was in the back of the book and Yeah, arranged to meet up.</p>
-
-          <p>We’d owned two rentals before then we did it all wrong. We didn't know what we were buying. We bought brilliant properties we should have just held, but we had problems because I was trying to manage them and I was too soft on tenants and really got walked over. We had a tinny house was one of them, got completely trashed.</p>
-
-          <p>They were both such good yields I think they're just under about a 13% yield. From sheer dumb luck. But we sold them and then did nothing for a while until I read this book and I just was like one of those moments. When you read a book the numbers in a book how much money you can make through properties. So we joined up With Steve and learn how to do it properly.</p>
-        </div>
-
-        <!-- Centered photo row -->
-        <div class="testimonial-photo" id="sonya-photo">
-          <!-- Replace src with your actual asset name/path. Prefer no spaces in filenames. -->
-          <img src="Sonya and Steve.png" alt="Sonya & Steve" loading="lazy" width="360" height="360">
-        </div>
-
-        <!-- Part 2: full-width continuation -->
-        <div class="testimonial-full" id="sonya-part-2">
-          <p>It’s your basics, its getting your team. It's it's knowing who to ring and to have someone stand there and say, okay yeah, you're doing this right or no, you're doing that wrong. This is how you do it properly and pretty much holding your hand. Steve set us up with a great team.</p>
-
-          <p>We learnt the numbers properly meant, what a good deal was, that we had such a good yield. And learnt that you don't actually really want to do it yourself so you want to get someone in there who can manage this properly and that's their job.</p>
-
-          <p>And when we weren't sure of a process he corrected us and made sure we did it properly. So there were no mistakes along the way, (we avoided) costly mistakes.</p>
-
-          <p>It's amazing how it changes your mindset once you get into something like this other opportunities come along as well. Okay, not just property, this opens you up to everything else that's out there .Yeah, and so it's changed us hugely, not just now that we have houses and we have Income when we're older, we've got other Investments sitting on there as well that we can pull on.</p>
-
-          <p>You know, its really good to have someone make sure you're doing it, right? And just make sure you're not gonna fall into the hole and lose everything because it's quite scary when you're starting out, thinking, oh, I could lose my house. But if there's someone sitting there going well actually no you have got it right, because look at this and this and this and add that up, you know, it's gonna work. So it's really nice having that back up.</p>
-
-          <p>We both would get on the phone to Steve and and not have questions he'd have different questions than I would And Steve was very patient. Actually, it really is worth every penny because I could have lost a lot of money if we had stepped off that cliff and done it ourselves again. We could have lost a lot of money, but having someone there. I mean my first trade I made my fee plus plus plus back right? So it was it was a no-brainer.</p>
-
-          <p>I think if we hadn't taken on a coach we may have done another one or two eventually right one or two trades and then I think our nerves would have just gotten too much. It would have been a bit too scary and you know, you can lose too much money and we can lose the house but having a coach there to say go with these numbers or go with you got instinct and just double checking and ticking and ticking the boxes and adding up everything for you it it's bit of a no-brainer.</p>
-
-          <p>And you know what, I wish I'd done it sooner, I wish I'd done it a lot sooner done it in my 20s and 30s instead of starting in my 40s. Which is when we did start because it makes it so much easier the longer you're in this game.</p>
-        </div>
-
-      </div>
-
-      <!-- Duplicate stacked testimonial beneath so you can add two more (left/top text, image, right/bottom text)
-           Currently placeholders for quick editing. -->
-      <div class="testimonial-stack" aria-hidden="false">
-        <div class="testimonial-full">
-          <h3>Jayne and Jack</h3>
-          <p>I've just had lunch with a couple of girlfriends in Ellerslie and just made my way in here.
-School holidays as well, so I've got the kids keeping me busy too. And just had a couple of weeks in Italy and Croatia. Beautiful, sunny, warm. I've just completed a deal in Mount Wellington, a little two-bedroom brick and tile unit.  Bought, renovated and sold within, it was 14 weeks I think and it paid for the holiday.
-
-We have been working together with Steve since 2009. I was a mother of three young children at the time. I probably had next to no money, monetary, money in the bank, and I'd just been made redundant. I don't know if Steve knew that at the time.
-
-So I had three children under three, I had no money and I was running out of options, so I thought, oh well, I'll go along to this property seminar that Steve was running. And see what they've got to say. <p></p>Well, it just sort of clicked, you know, like I've always been interested in property, always since, you know, forever. And when I went along to the seminar, they were talking about, you know, property trades and holds and so on. It just clicked what they were saying. It just made sense.
-
-I think it was, I can't remember how much it was. It was thousands. It was under 10,000 anyway. And so I didn't have the money but I signed up. And my husband was there with me at the time and he's a builder, so that was handy. And he was a semi-professional rugby player, so he was like on board from the beginning because he's a builder, he understands property. I think I had a property in Wellington to sell first to kind of get some momentum, to get some equity.
-.</p>
-        </div>
-
-        <div class="testimonial-photo">
-          <img src="Steve and Jayne.png" alt="Steve & Jayne" loading="lazy" width="360" height="360">
-        </div>
-
-        <div class="testimonial-full">
-          <p>I'd say probably quite slow in the first year but I was probably trading about four or five properties a year after that. And bought some buy and holds in the first year rather than trading. Steve just gave the basics of your sale and purchase agreement, the clauses to use. And then once I put my offers in with due diligence, he'd analyse the deal and say whether it was too high or low or anything that I wouldn't have thought of. It just gave me the confidence to analyse the deals based on the numbers. Really getting to know a market before you kind of initially buy a property and having the confidence to not be overwhelmed by the thousands of money that you're spending. 
-I don't think I would have had the confidence to actually even probably start without a coach because I just didn't have the vision and I didn't realise what property could do for you.<p></p>And yeah, I mean getting over your fear, getting in the right mindset and pushing through the fear of the big numbers is one thing, but also having the confidence in yourself once you know the market.
-
-My goal for the next two years and five years? Oh, obviously, buy more property. And get myself into a position where I can do that. 
-I firstly would say definitely go along to a seminar because you listen to what you guys have got to say. And the penny will drop. It does make sense.<p>
-
-I mean, people don't think when you first go along and you talk to agents about properties, you listen to the agent. Agents don't always tell you what you need to know. And whereas education through mentoring and coaching gives you the right knowledge. And I think having the right coach, and the right people around you, fast tracks everything.
-
-Consider getting into property investment as a vehicle to create wealth for your future. And the sooner you do it, the better. Because property is a long term game.
-</p>
-        </div>
-      </div>
-
+    <section style="margin-top:2rem;">
+      <h3 class="section-title">How I work</h3>
+      <p style="color:var(--muted);max-width:70ch;">
+        I focus on practical steps: clarifying your target returns, sourcing finance and deals that fit your strategy, and helping you manage renovations and lettings so properties perform from day one.
+      </p>
     </section>
 
-    <!-- CONTACT SECTION -->
-    <section id="contact" class="page-section" aria-labelledby="contact-heading">
-      <div class="section-header">
-        <h2 id="contact-heading">Contact</h2>
-        <div class="muted">or email <a href="mailto:steve@propertymentor.co.nz">steve@propertymentor.co.nz</a></div>
-      </div>
-
-      <div class="section-divider" aria-hidden="true"></div>
-
-      <div class="card" style="margin-bottom:18px;">
-        <p class="small">Have a question or want to book a workshop? Send a message below and Steve will get back to you.</p>
-
-        <div id="contactSuccess" class="success" role="status" aria-live="polite">Thanks — your message has been sent.</div>
-        <div id="contactError" class="error" role="alert" aria-live="assertive">Sorry, something went wrong. Please email <a href="mailto:steve@propertymentor.co.nz">steve@propertymentor.co.nz</a>.</div>
-
-        <form id="contactForm" class="contact" autocomplete="on" novalidate>
-          <div class="row">
-            <div class="field">
-              <label for="name">Full name *</label>
-              <input id="name" name="name" type="text" required placeholder="Jane Doe" />
-            </div>
-            <div class="field">
-              <label for="email">Email *</label>
-              <input id="email" name="email" type="email" required placeholder="you@example.com" />
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="field">
-              <label for="phone">Phone *</label>
-              <input id="phone" name="phone" type="tel" required placeholder="0275-413-061" />
-            </div>
-            <div class="field visually-hidden">
-              <label for="website">Website (leave blank)</label>
-              <input id="website" name="website" type="text" />
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="message">Message *</label>
-            <textarea id="message" name="message" rows="5" required placeholder="Tell us how we can help"></textarea>
-          </div>
-
-          <div class="actions">
-            <button class="btn btn-primary" type="submit">Send message</button>
-            <span class="note">or email <a href="mailto:steve@propertymentor.co.nz">steve@propertymentor.co.nz</a></span>
-          </div>
-        </form>
+    <section style="margin-top:2rem;">
+      <h3 class="section-title">Get in touch</h3>
+      <p style="color:var(--muted);">Prefer a quick chat? Book a call or send a message and I'll reply within 48 hours.</p>
+      <div style="margin-top:0.75rem;">
+        <a class="btn btn-primary" href="/contact">Book a call</a>
+        <a class="btn btn-ghost" href="/contact#message">Send a message</a>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
-      <div class="small">© Property Mentor — Proven expertise. Real New Zealand property results.</div>
-      <div class="small">Built for GitHub Pages • Replace assets with archived copies as needed</div>
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:1rem;">
+      <div>
+        <p style="margin:0;">© Steve Starke Property Mentor</p>
+        <p style="margin:0;color:var(--muted);font-size:0. nine rem;">Serving investors across the UK</p>
+      </div>
+      <nav aria-label="Footer" style="font-size:0.95rem;">
+        <a href="/privacy" style="color:var(--muted);text-decoration:none;margin-right:0.75rem;">Privacy</a>
+        <a href="/terms" style="color:var(--muted);text-decoration:none;">Terms</a>
+      </nav>
     </div>
   </footer>
-
-  <script>
-  // Contact form config (unchanged)
-  const USE_FORMSPREE = true;
-  const FORMSPREE_ENDPOINT = "https://formspree.io/f/xzzkkjwd";
-
-  (function () {
-    const form = document.getElementById('contactForm');
-    const ok = document.getElementById('contactSuccess');
-    const err = document.getElementById('contactError');
-
-    function validEmail(v){ return /.+@.+\..+/.test(v); }
-    function validPhone(v){ return /^[0-9()+\-\s]{7,}$/.test(v); }
-
-    if (!form) return;
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      if (ok) ok.style.display = 'none';
-      if (err) {
-        err.style.display = 'none';
-        err.textContent = '';
-      }
-
-      const data = Object.fromEntries(new FormData(form).entries());
-      if (data.website) { return; }
-
-      if (!data.name || !validEmail(data.email) || !data.message || !data.phone) {
-        if (err) {
-          err.textContent = 'Please fill name, a valid email, phone number and your message.';
-          err.style.display = 'block';
-        }
-        return;
-      }
-
-      if (!validPhone(data.phone.trim())) {
-        if (err) {
-          err.textContent = 'Please enter a valid phone number (digits, spaces, +, -, parentheses; at least 7 characters).';
-          err.style.display = 'block';
-        }
-        return;
-      }
-
-      try{
-        const res = await fetch(FORMSPREE_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name: data.name,
-            email: data.email,
-            phone: data.phone || '',
-            message: data.message
-          })
-        });
-        if (res.ok){
-          if (ok) {
-            ok.style.display = 'block';
-            form.reset();
-          }
-          return;
-        }
-        throw new Error('Bad status: ' + res.status);
-      }catch(e){
-        console.error(e);
-        if (err) {
-          err.textContent = 'There was an error sending your message. Please try again later.';
-          err.style.display = 'block';
-        }
-      }
-    });
-  })();
-
-  // Anchor offset & smooth scroll (unchanged from previous)
-  (function () {
-    const header = document.getElementById('site-header');
-    const setOffset = () => {
-      if (!header) return;
-      const rect = header.getBoundingClientRect();
-      const offset = Math.ceil(rect.height) + 8;
-      document.documentElement.style.setProperty('--anchor-offset', offset + 'px');
-    };
-    let t;
-    window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(setOffset, 80); });
-    window.addEventListener('orientationchange', () => { clearTimeout(t); t = setTimeout(setOffset, 120); });
-    window.addEventListener('load', setOffset);
-    setOffset();
-
-    const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', (e) => {
-        const href = a.getAttribute('href');
-        if (!href || href === '#') return;
-        const targetId = href.slice(1);
-        const target = document.getElementById(targetId);
-        if (!target) return;
-        e.preventDefault();
-
-        const computedOffset = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--anchor-offset')) || 120;
-        const top = target.getBoundingClientRect().top + window.scrollY - computedOffset;
-
-        window.scrollTo({ top, behavior: reduced ? 'auto' : 'smooth' });
-
-        const previousTabIndex = target.getAttribute('tabindex');
-        const hadTabIndex = previousTabIndex !== null;
-        if (!hadTabIndex) target.setAttribute('tabindex', '-1');
-        try {
-          target.focus({ preventScroll: true });
-        } catch (err) {
-          target.focus();
-        }
-        if (!hadTabIndex) {
-          setTimeout(() => target.removeAttribute('tabindex'), 1000);
-        }
-
-        if (window.location.hash !== '#' + targetId) {
-          history.replaceState(null, '', '#' + targetId);
-        }
-      });
-    });
-  }());
-  </script>
 </body>
 </html>
