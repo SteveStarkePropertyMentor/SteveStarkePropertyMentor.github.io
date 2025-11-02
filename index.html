@@ -202,18 +202,18 @@
       justify-content: flex-start;
     }
 
-    /* Paired rows: ensure image and text match height */
+    /* Paired rows: ensure image and text match height (legacy) */
     .paired-row {
       display: flex;
       gap: 1rem;
-      align-items: stretch; /* critical: stretch children to same height */
+      align-items: stretch;
       margin-bottom: 1.5rem;
     }
     .paired-row .text-box {
       flex: 1 1 50%;
     }
     .paired-row .image-placeholder {
-      flex: 0 0 320px; /* fixed visual width for desktop */
+      flex: 0 0 320px;
       min-height: 200px;
       padding: 0.5rem;
       align-items: stretch;
@@ -226,10 +226,63 @@
       display: block;
     }
 
-    /* On smaller screens make images match the text height and full-width */
+    /* New testimonial grid: split the testimonial area into three equal "page width" sections
+       with the photo centered in the middle column. Left and right columns hold the testimonial
+       text split into two balanced columns. */
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: 1fr 320px 1fr; /* left text | image center | right text */
+      gap: 20px;
+      align-items: start;
+      margin-bottom: 1.5rem;
+      width: 100%;
+    }
+    .testimonial-grid .testimonial-text {
+      padding: 18px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(0,0,0,0.06);
+      color: #222;
+      line-height: 1.5;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .testimonial-grid .testimonial-photo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+    }
+    .testimonial-grid .testimonial-photo img {
+      width: 100%;
+      max-width: 320px;
+      height: auto;
+      border-radius: 8px;
+      object-fit: cover;
+      display: block;
+      border: 1px solid rgba(0,0,0,0.06);
+      background: #fff;
+    }
+
+    /* On smaller screens collapse into a single column with photo between text blocks */
     @media (max-width: 880px) {
       .hero { grid-template-columns: 1fr; }
       .navlinks { display: none; }
+
+      .testimonial-grid {
+        grid-template-columns: 1fr;
+      }
+      .testimonial-grid .testimonial-photo {
+        order: 2;
+        width: 100%;
+      }
+      .testimonial-grid .testimonial-text {
+        order: 1;
+      }
+      .testimonial-grid .testimonial-text + .testimonial-text {
+        order: 3;
+      }
 
       .paired-row {
         flex-direction: column;
@@ -457,80 +510,62 @@
         <p class="lead">Read stories from investors who worked with Steve and improved their property decision-making and results.</p>
       </div>
 
-      <!-- Updated: place Sonya & Steve photo to the right of the testimonial text,
-           removed the second placeholder image, and duplicated the testimonial block
-           underneath so you can add two more testimonials. -->
+      <!-- New layout: testimonial split into three equal page-width columns with the photo centered.
+           The long Sonya & Steve testimonial text is split into left and right text panels that
+           flank the centrally-placed photo. On small screens this stacks with the photo between text blocks. -->
 
-      <!-- Testimonial 1: Sonya and Steve (image on the right) -->
-      <div class="paired-row" aria-hidden="false">
-        <div class="text-box">
+      <div class="testimonial-grid" aria-hidden="false">
+        <!-- Left column (first half of the testimonial) -->
+        <div class="testimonial-text" id="sonya-steve-left">
           <h3>Sonya and Steve</h3>
-          <p>
-I was working for a company and I had an accident and screwed my shoulder up and I couldn't work basically lost my job because of it. Dave brought me home a book on property investing and I sat up one night and read it to about 2 in the morning. And just sometimes there's a there's a something that gets you and this book got me. And I woke him up at 2 in the morning and told him we're doing this right now. So I phoned Steve the next morning, because his number was in the back of the book and Yeah, arranged to meet up.
-          </p>
 
-          <p>
-We’d owned two rentals before then we did it all wrong. We didn't know what we were buying. We bought brilliant properties we should have just held, but we had problems because I was trying to manage them and I was too soft on tenants and really got walked over. We had a tinny house was one of them, got completely trashed.
-          </p>
+          <p>I was working for a company and I had an accident and screwed my shoulder up and I couldn't work basically lost my job because of it. Dave brought me home a book on property investing and I sat up one night and read it to about 2 in the morning. And just sometimes there's a there's a something that gets you and this book got me. And I woke him up at 2 in the morning and told him we're doing this right now. So I phoned Steve the next morning, because his number was in the back of the book and Yeah, arranged to meet up.</p>
 
-          <p>
-They were both such good yields I think they're just under about a 13% yield. From sheer dumb luck. But we sold them and then did nothing for a while until I read this book and I just was like one of those moments. When you read a book the numbers in a book how much money you can make through properties. So we joined up With Steve and learn how to do it properly.
-          </p>
+          <p>We’d owned two rentals before then we did it all wrong. We didn't know what we were buying. We bought brilliant properties we should have just held, but we had problems because I was trying to manage them and I was too soft on tenants and really got walked over. We had a tinny house was one of them, got completely trashed.</p>
 
-          <p>
-It’s your basics, its getting your team. It's it's knowing who to ring and to have someone stand there and say, okay yeah, you're doing this right or no, you're doing that wrong. This is how you do it properly and pretty much holding your hand. Steve set us up with a great team.
-          </p>
-
-          <p>
-We learnt the numbers properly meant, what a good deal was, that we had such a good yield. And learnt that you don't actually really want to do it yourself so you want to get someone in there who can manage this properly and that's their job.
-          </p>
-
-          <p>
-And when we weren't sure of a process he corrected us and made sure we did it properly. So there were no mistakes along the way, (we avoided) costly mistakes.
-          </p>
-
-          <p>
-It's amazing how it changes your mindset once you get into something like this other opportunities come along as well. Okay, not just property, this opens you up to everything else that's out there .Yeah, and so it's changed us hugely, not just now that we have houses and we have Income when we're older, we've got other Investments sitting on there as well that we can pull on.
-          </p>
-
-          <p>
-You know, its really good to have someone make sure you're doing it, right? And just make sure you're not gonna fall into the hole and lose everything because it's quite scary when you're starting out, thinking, oh, I could lose my house. But if there's someone sitting there going well actually no you have got it right, because look at this and this and this and add that up, you know, it's gonna work. So it's really nice having that back up.
-          </p>
-
-          <p>
-We both would get on the phone to Steve and and not have questions he'd have different questions than I would And Steve was very patient. Actually, it really is worth every penny because I could have lost a lot of money if we had stepped off that cliff and done it ourselves again. We could have lost a lot of money, but having someone there. I mean my first trade I made my fee plus plus plus back right? So it was it was a no-brainer.
-          </p>
-
-          <p>
-I think if we hadn't taken on a coach we may have done another one or two eventually right one or two trades and then I think our nerves would have just gotten too much. It would have been a bit too scary and you know, you can lose too much money and we can lose the house but having a coach there to say go with these numbers or go with you got instinct and just double checking and ticking and ticking the boxes and adding up everything for you it it's bit of a no-brainer.
-          </p>
-
-          <p>
-And you know what, I wish I'd done it sooner, I wish I'd done it a lot sooner done it in my 20s and 30s instead of starting in my 40s. Which is when we did start because it makes it so much easier the longer you're in this game.
-          </p>
+          <p>They were both such good yields I think they're just under about a 13% yield. From sheer dumb luck. But we sold them and then did nothing for a while until I read this book and I just was like one of those moments. When you read a book the numbers in a book how much money you can make through properties. So we joined up With Steve and learn how to do it properly.</p>
         </div>
 
-        <figure class="image-placeholder" aria-hidden="false" style="padding:0.5rem;">
-          <!-- Use a filename without spaces for reliability; update to match your actual asset.
-               If your asset is "Sonya and Steve.png" keep it but consider renaming to "sonya-and-steve.png". -->
+        <!-- Center column (photo) -->
+        <div class="testimonial-photo" aria-hidden="false">
+          <!-- Use a filename without spaces for reliability; change path/name to match your asset -->
           <img src="sonya-and-steve.png" alt="Sonya & Steve" loading="lazy" width="320" height="320">
-        </figure>
+        </div>
+
+        <!-- Right column (second half of the testimonial) -->
+        <div class="testimonial-text" id="sonya-steve-right">
+          <p>It’s your basics, its getting your team. It's it's knowing who to ring and to have someone stand there and say, okay yeah, you're doing this right or no, you're doing that wrong. This is how you do it properly and pretty much holding your hand. Steve set us up with a great team.</p>
+
+          <p>We learnt the numbers properly meant, what a good deal was, that we had such a good yield. And learnt that you don't actually really want to do it yourself so you want to get someone in there who can manage this properly and that's their job.</p>
+
+          <p>And when we weren't sure of a process he corrected us and made sure we did it properly. So there were no mistakes along the way, (we avoided) costly mistakes.</p>
+
+          <p>It's amazing how it changes your mindset once you get into something like this other opportunities come along as well. Okay, not just property, this opens you up to everything else that's out there .Yeah, and so it's changed us hugely, not just now that we have houses and we have Income when we're older, we've got other Investments sitting on there as well that we can pull on.</p>
+
+          <p>You know, its really good to have someone make sure you're doing it, right? And just make sure you're not gonna fall into the hole and lose everything because it's quite scary when you're starting out, thinking, oh, I could lose my house. But if there's someone sitting there going well actually no you have got it right, because look at this and this and this and add that up, you know, it's gonna work. So it's really nice having that back up.</p>
+
+          <p>We both would get on the phone to Steve and and not have questions he'd have different questions than I would And Steve was very patient. Actually, it really is worth every penny because I could have lost a lot of money if we had stepped off that cliff and done it ourselves again. We could have lost a lot of money, but having someone there. I mean my first trade I made my fee plus plus plus back right? So it was it was a no-brainer.</p>
+
+          <p>I think if we hadn't taken on a coach we may have done another one or two eventually right one or two trades and then I think our nerves would have just gotten too much. It would have been a bit too scary and you know, you can lose too much money and we can lose the house but having a coach there to say go with these numbers or go with you got instinct and just double checking and ticking and ticking the boxes and adding up everything for you it it's bit of a no-brainer.</p>
+
+          <p>And you know what, I wish I'd done it sooner, I wish I'd done it a lot sooner done it in my 20s and 30s instead of starting in my 40s. Which is when we did start because it makes it so much easier the longer you're in this game.</p>
+        </div>
       </div>
 
-      <!-- Testimonial 2: duplicated block underneath so you can add two more testimonials.
-           This is an exact duplicate of the Sonya & Steve block — replace the text and image
-           as desired for new testimonials. -->
-      <div class="paired-row" aria-hidden="false">
-        <div class="text-box">
-          <h3>Sonya and Steve</h3>
-          <p>
-Duplicate copy of the testimonial block to make it easy to add another testimonial beneath the first. Replace this text with the next testimonial content when you're ready.
-          </p>
+      <!-- Duplicate grid underneath so you can add two more testimonials; left and right are placeholders -->
+      <div class="testimonial-grid" aria-hidden="false">
+        <div class="testimonial-text">
+          <h3>Client Name</h3>
+          <p>Replace this left column with the first of the two new testimonial paragraphs. Keep the tone conversational and personal.</p>
         </div>
 
-        <figure class="image-placeholder" aria-hidden="false" style="padding:0.5rem;">
-          <img src="sonya-and-steve.png" alt="Sonya & Steve (duplicate)" loading="lazy" width="320" height="320">
-        </figure>
+        <div class="testimonial-photo">
+          <img src="client-placeholder.jpg" alt="Client portrait placeholder" loading="lazy" width="320" height="320">
+        </div>
+
+        <div class="testimonial-text">
+          <p>Replace this right column with the continuation of the testimonial or a second paragraph for the same client. Swap image and text as required.</p>
+        </div>
       </div>
 
     </section>
