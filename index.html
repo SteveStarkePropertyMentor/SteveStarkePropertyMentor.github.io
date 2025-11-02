@@ -226,37 +226,37 @@
       display: block;
     }
 
-    /* New testimonial grid: split the testimonial area into three equal "page width" sections
-       with the photo centered in the middle column. Left and right columns hold the testimonial
-       text split into two balanced columns. */
-    .testimonial-grid {
+    /* New "stacked" testimonial layout requested:
+       Part 1 of the Sonya story spans page width (full-width block),
+       then a centered photo row, then part 2 spanning page width.
+       This keeps the section heights and spacing consistent with the rest of the site. */
+    .testimonial-stack {
       display: grid;
-      grid-template-columns: 1fr 320px 1fr; /* left text | image center | right text */
-      gap: 20px;
-      align-items: start;
+      grid-template-columns: 1fr;
+      gap: 18px;
       margin-bottom: 1.5rem;
+      align-items: start;
       width: 100%;
     }
-    .testimonial-grid .testimonial-text {
+
+    .testimonial-stack .testimonial-full {
       padding: 18px;
       border-radius: 10px;
       background: rgba(255,255,255,0.02);
       border: 1px solid rgba(0,0,0,0.06);
       color: #222;
-      line-height: 1.5;
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
+      line-height: 1.6;
     }
-    .testimonial-grid .testimonial-photo {
+
+    .testimonial-stack .testimonial-photo {
       display: flex;
       align-items: center;
       justify-content: center;
-      background: transparent;
+      padding: 8px;
     }
-    .testimonial-grid .testimonial-photo img {
+    .testimonial-stack .testimonial-photo img {
       width: 100%;
-      max-width: 320px;
+      max-width: 360px; /* photo size as earlier */
       height: auto;
       border-radius: 8px;
       object-fit: cover;
@@ -265,23 +265,14 @@
       background: #fff;
     }
 
-    /* On smaller screens collapse into a single column with photo between text blocks */
+    /* If you prefer to visually separate the two text blocks, we keep subtle padding.
+       On smaller screens everything naturally stacks (same order). */
     @media (max-width: 880px) {
       .hero { grid-template-columns: 1fr; }
       .navlinks { display: none; }
 
-      .testimonial-grid {
+      .testimonial-stack {
         grid-template-columns: 1fr;
-      }
-      .testimonial-grid .testimonial-photo {
-        order: 2;
-        width: 100%;
-      }
-      .testimonial-grid .testimonial-text {
-        order: 1;
-      }
-      .testimonial-grid .testimonial-text + .testimonial-text {
-        order: 3;
       }
 
       .paired-row {
@@ -510,13 +501,16 @@
         <p class="lead">Read stories from investors who worked with Steve and improved their property decision-making and results.</p>
       </div>
 
-      <!-- New layout: testimonial split into three equal page-width columns with the photo centered.
-           The long Sonya & Steve testimonial text is split into left and right text panels that
-           flank the centrally-placed photo. On small screens this stacks with the photo between text blocks. -->
+      <!-- Requested layout:
+           - Part 1 of the Sonya story spans the page width (full-width text block)
+           - Then the photo is centered on its own row
+           - Then Part 2 spans the page width underneath
+           - A duplicate block follows so you can add two more testimonials; sizes & spacing kept consistent with other sections.
+      -->
+      <div class="testimonial-stack" aria-hidden="false">
 
-      <div class="testimonial-grid" aria-hidden="false">
-        <!-- Left column (first half of the testimonial) -->
-        <div class="testimonial-text" id="sonya-steve-left">
+        <!-- Part 1: full-width text -->
+        <div class="testimonial-full" id="sonya-part-1">
           <h3>Sonya and Steve</h3>
 
           <p>I was working for a company and I had an accident and screwed my shoulder up and I couldn't work basically lost my job because of it. Dave brought me home a book on property investing and I sat up one night and read it to about 2 in the morning. And just sometimes there's a there's a something that gets you and this book got me. And I woke him up at 2 in the morning and told him we're doing this right now. So I phoned Steve the next morning, because his number was in the back of the book and Yeah, arranged to meet up.</p>
@@ -526,14 +520,14 @@
           <p>They were both such good yields I think they're just under about a 13% yield. From sheer dumb luck. But we sold them and then did nothing for a while until I read this book and I just was like one of those moments. When you read a book the numbers in a book how much money you can make through properties. So we joined up With Steve and learn how to do it properly.</p>
         </div>
 
-        <!-- Center column (photo) -->
-        <div class="testimonial-photo" aria-hidden="false">
-          <!-- Use a filename without spaces for reliability; change path/name to match your asset -->
-          <img src="sonya-and-steve.png" alt="Sonya & Steve" loading="lazy" width="320" height="320">
+        <!-- Centered photo row -->
+        <div class="testimonial-photo" id="sonya-photo">
+          <!-- Replace src with your actual asset name/path. Prefer no spaces in filenames. -->
+          <img src="sonya-and-steve.png" alt="Sonya & Steve" loading="lazy" width="360" height="360">
         </div>
 
-        <!-- Right column (second half of the testimonial) -->
-        <div class="testimonial-text" id="sonya-steve-right">
+        <!-- Part 2: full-width continuation -->
+        <div class="testimonial-full" id="sonya-part-2">
           <p>It’s your basics, its getting your team. It's it's knowing who to ring and to have someone stand there and say, okay yeah, you're doing this right or no, you're doing that wrong. This is how you do it properly and pretty much holding your hand. Steve set us up with a great team.</p>
 
           <p>We learnt the numbers properly meant, what a good deal was, that we had such a good yield. And learnt that you don't actually really want to do it yourself so you want to get someone in there who can manage this properly and that's their job.</p>
@@ -550,21 +544,23 @@
 
           <p>And you know what, I wish I'd done it sooner, I wish I'd done it a lot sooner done it in my 20s and 30s instead of starting in my 40s. Which is when we did start because it makes it so much easier the longer you're in this game.</p>
         </div>
+
       </div>
 
-      <!-- Duplicate grid underneath so you can add two more testimonials; left and right are placeholders -->
-      <div class="testimonial-grid" aria-hidden="false">
-        <div class="testimonial-text">
+      <!-- Duplicate stacked testimonial beneath so you can add two more (left/top text, image, right/bottom text)
+           Currently placeholders for quick editing. -->
+      <div class="testimonial-stack" aria-hidden="false">
+        <div class="testimonial-full">
           <h3>Client Name</h3>
-          <p>Replace this left column with the first of the two new testimonial paragraphs. Keep the tone conversational and personal.</p>
+          <p>First part of testimonial — replace with the opening paragraph for the new testimonial.</p>
         </div>
 
         <div class="testimonial-photo">
-          <img src="client-placeholder.jpg" alt="Client portrait placeholder" loading="lazy" width="320" height="320">
+          <img src="client-placeholder.jpg" alt="Client portrait placeholder" loading="lazy" width="360" height="360">
         </div>
 
-        <div class="testimonial-text">
-          <p>Replace this right column with the continuation of the testimonial or a second paragraph for the same client. Swap image and text as required.</p>
+        <div class="testimonial-full">
+          <p>Second part / continuation of testimonial — replace this with the remainder of the testimonial text or a second paragraph.</p>
         </div>
       </div>
 
