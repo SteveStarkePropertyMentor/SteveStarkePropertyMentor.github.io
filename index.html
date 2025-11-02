@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Steve Starke — Property Mentor</title>
+  <meta name="description" content="Steve Starke — Property Mentor. Practical property investing mentorship, articles, resources and ways to get in touch." />
 
   <style>
     /* Reset / basic layout */
@@ -13,6 +14,7 @@
       --muted: #555;
       --bg: #fff;
       --page-padding: 20px;
+      --radius: 12px;
     }
     html,body{
       height:100%;
@@ -23,6 +25,7 @@
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
       line-height:1.45;
+      -webkit-text-size-adjust:100%;
     }
 
     .site {
@@ -30,6 +33,8 @@
       align-items:flex-start;
       justify-content:center;
       padding:40px var(--page-padding);
+      min-height:100vh;
+      box-sizing:border-box;
     }
 
     .container {
@@ -46,6 +51,8 @@
       .container{
         grid-template-columns: 1fr;
       }
+      .card { align-items:stretch; }
+      .photo-wrap { max-width:100%; height:auto; }
     }
 
     /* Left column: photo card */
@@ -53,7 +60,7 @@
       background:#fafafa;
       border:1px solid #eee;
       padding:20px;
-      border-radius:12px;
+      border-radius:var(--radius);
       box-shadow:0 6px 18px rgba(12,40,80,0.04);
       display:flex;
       flex-direction:column;
@@ -65,18 +72,18 @@
     .photo-wrap{
       width:100%;
       max-width:260px;
-      /* maintain a rectangular/portrait feel while keeping natural aspect */
       display:block;
       border-radius:10px;
       overflow:hidden;
       background:linear-gradient(180deg,#efefef,#f8f8f8);
+      flex-shrink:0;
     }
 
     .photo-wrap img{
       display:block;
       width:100%;
-      height:auto;           /* crucial: preserves aspect ratio, prevents skew/stretch */
-      object-fit:cover;      /* if image is larger than container, cover will crop rather than distort */
+      height:auto;           /* preserves aspect ratio */
+      object-fit:cover;      /* crop if needed */
       vertical-align:middle;
     }
 
@@ -98,10 +105,21 @@
       background:transparent;
     }
 
+    header.site-header{
+      display:flex;
+      align-items:baseline;
+      gap:12px;
+      justify-content:space-between;
+    }
+
     h1{
       margin-top:0;
       margin-bottom:8px;
       font-size:1.6rem;
+    }
+    h2{
+      margin:0 0 8px 0;
+      font-size:1.1rem;
     }
     p{
       margin-top:0;
@@ -137,6 +155,27 @@
       box-shadow:none;
     }
 
+    .card-meta {
+      width:100%;
+      text-align:center;
+      color:var(--muted);
+      font-size:0.95rem;
+    }
+
+    .list {
+      display:grid;
+      gap:12px;
+      margin-top:8px;
+    }
+
+    .article {
+      border-left:3px solid transparent;
+      padding:10px 12px;
+      border-radius:8px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.45));
+    }
+    .article a { font-weight:600; color:inherit; }
+
     footer{
       margin-top:28px;
       color:var(--muted);
@@ -146,51 +185,106 @@
     /* Utility */
     .muted{ color:var(--muted); }
     .small{ font-size:0.9rem; }
+
+    /* Accessibility focus styles */
+    a:focus, .btn:focus {
+      outline:3px solid rgba(11,102,255,0.18);
+      outline-offset:3px;
+    }
   </style>
 </head>
 <body>
   <div class="site">
     <div class="container">
 
-      <aside class="card" aria-labelledby="profile-name">
+      <aside class="card" aria-labelledby="profile-name" role="complementary">
         <figure class="photo-wrap" role="img" aria-label="Photo of Steve and Hele">
-          <!-- Replace the src below with your actual image path or URL.
-               The styling below ensures the image keeps its natural aspect ratio,
-               won't be stretched, and will crop gently if the image is larger than the container. -->
-          <img src="images/steve-and-hele.jpg" alt="Steve and Hele smiling together">
+          <!-- Use responsive image with lazy loading. Replace src and srcset with real image files/sizes. -->
+          <img
+            src="images/steve-and-hele.jpg"
+            srcset="images/steve-and-hele-480.jpg 480w,
+                    images/steve-and-hele-800.jpg 800w"
+            sizes="(max-width:840px) 80vw, 260px"
+            alt="Steve and Hele smiling together"
+            loading="lazy"
+            decoding="async"
+          />
         </figure>
 
-        <div style="width:100%; text-align:center;">
+        <div class="card-meta" style="margin-top:4px;">
           <h2 id="profile-name" class="name">Steve Starke</h2>
           <div class="role">Property Mentor</div>
-        </div>
 
-        <div class="small muted" style="text-align:center; margin-top:4px;">
-          Based in [Your Location]. Helping people build property wealth.
+          <div class="small muted" style="margin-top:8px;">
+            Based in [Your Location]. Helping people build property wealth.
+          </div>
+
+          <div style="margin-top:12px;">
+            <a class="btn" href="#contact">Contact</a>
+          </div>
         </div>
       </aside>
 
       <main class="main" role="main">
-        <h1>Welcome — I'm Steve Starke</h1>
-        <p>
-          I mentor people through property investing, sharing practical strategies and the lessons I've learned.
-          This site collects my articles, resources and ways to get in touch.
-        </p>
+        <header class="site-header" aria-hidden="false">
+          <div>
+            <h1>Welcome — I'm Steve Starke</h1>
+            <p class="muted small">Practical mentoring in property investing — strategies, case studies and support.</p>
+          </div>
 
-        <div class="cta">
-          <a class="btn" href="#contact">Contact me</a>
-          <a class="btn btn--outline" href="#articles">Read articles</a>
-        </div>
+          <nav aria-label="Quick links">
+            <div class="cta" role="navigation">
+              <a class="btn" href="#contact">Contact me</a>
+              <a class="btn btn--outline" href="#articles">Read articles</a>
+            </div>
+          </nav>
+        </header>
 
-        <section style="margin-top:20px;">
-          <h2>Latest</h2>
-          <p class="muted small">
-            Content and updates appear here. Replace this paragraph with your latest blog posts or featured items.
+        <section id="intro" style="margin-top:12px;">
+          <p>
+            I mentor people through property investing, sharing practical strategies and the lessons I've learned over years of
+            hands-on experience. This site collects my articles, resources and ways to get in touch.
           </p>
         </section>
 
+        <section id="articles" style="margin-top:18px;">
+          <h2>Latest</h2>
+          <p class="muted small">
+            Below are featured posts and resources. Replace these samples with real links to your blog posts, case studies or downloads.
+          </p>
+
+          <div class="list" aria-live="polite">
+            <article class="article" aria-labelledby="a1">
+              <h3 id="a1" style="margin:0 0 6px 0;"><a href="#article-1">First steps to building a property portfolio</a></h3>
+              <p class="muted small" style="margin:0;">A practical checklist for beginners — finance, planning and strategy.</p>
+            </article>
+
+            <article class="article" aria-labelledby="a2">
+              <h3 id="a2" style="margin:0 0 6px 0;"><a href="#article-2">How to spot value in the market</a></h3>
+              <p class="muted small" style="margin:0;">Case studies and red flags to watch for when evaluating deals.</p>
+            </article>
+
+            <article class="article" aria-labelledby="a3">
+              <h3 id="a3" style="margin:0 0 6px 0;"><a href="#article-3">Raising finance: practical options</a></h3>
+              <p class="muted small" style="margin:0;">Traditional mortgages, bridging, JV and creative funding approaches.</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="contact" style="margin-top:20px;">
+          <h2>Get in touch</h2>
+          <p class="small muted">
+            Prefer email? Send a message to <a href="mailto:hello@example.com">hello@example.com</a>.
+            You can also follow updates on social channels (replace with real links).
+          </p>
+          <div style="margin-top:8px;">
+            <a class="btn" href="mailto:hello@example.com">Email me</a>
+            <a class="btn btn--outline" href="#contact-form">Message</a>
+          </div>
+        </section>
+
         <footer>
-          <div>© <span id="year"></span> Steve Starke</div>
+          <div>© <span id="year"></span> Steve Starke — Property Mentor</div>
         </footer>
       </main>
 
@@ -199,7 +293,10 @@
 
   <script>
     // Small enhancement: current year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    (function(){
+      var y = document.getElementById('year');
+      if (y) y.textContent = new Date().getFullYear();
+    })();
   </script>
 </body>
 </html>
