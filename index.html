@@ -6,7 +6,6 @@
   <title>Property Mentor — Official Website</title>
   <meta name="description" content="Property Mentor – Proven expertise and real New Zealand property results for real New Zealand investors."/>
   <meta name="theme-color" content="#4CAF50" />
-  <!-- Open Graph / Twitter basic tags -->
   <meta property="og:title" content="Property Mentor — Official Website" />
   <meta property="og:description" content="Proven expertise and real New Zealand property results for real New Zealand investors." />
   <meta property="og:type" content="website" />
@@ -184,6 +183,13 @@
       box-sizing:border-box;
       border-radius:8px;
     }
+    .image-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 6px;
+    }
     .text-box {
       flex:1 1 50%;
       padding:1rem;
@@ -191,6 +197,58 @@
       box-sizing:border-box;
       border-radius:8px;
       background: rgba(255,255,255,0.02);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    /* Paired rows: ensure image and text match height */
+    .paired-row {
+      display: flex;
+      gap: 1rem;
+      align-items: stretch; /* critical: stretch children to same height */
+      margin-bottom: 1.5rem;
+    }
+    .paired-row .text-box {
+      flex: 1 1 50%;
+    }
+    .paired-row .image-placeholder {
+      flex: 0 0 320px; /* fixed visual width for desktop */
+      min-height: 200px;
+      padding: 0.5rem;
+      align-items: stretch;
+    }
+    .paired-row .image-placeholder img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+    }
+
+    /* On smaller screens make images match the text height and full-width */
+    @media (max-width: 880px) {
+      .hero { grid-template-columns: 1fr; }
+      .navlinks { display: none; }
+
+      .paired-row {
+        flex-direction: column;
+      }
+      .paired-row .image-placeholder {
+        flex: 0 0 auto;
+        height: auto;
+        min-height: 160px;
+      }
+      .paired-row .image-placeholder img {
+        height: auto;
+      }
+    }
+
+    @media (max-width:720px){
+      .placeholder-row, .text-box-row { flex-direction:column; }
+      .row { grid-template-columns:1fr; }
+      .about-photo { max-width: 100%; flex: 0 0 100%; }
+      .about-copy { flex: 0 0 100%; }
     }
 
     /* About profile specific */
@@ -245,18 +303,6 @@
     .note { font-size:13px; color:var(--muted); }
     .success { display:none; padding:12px; border:1px solid #d1fae5; background:#ecfdf5; color:#065f46; border-radius:10px; }
     .error { display:none; padding:12px; border:1px solid #fecaca; background:#fef2f2; color:#7f1d1d; border-radius:10px; }
-
-    /* Responsive */
-    @media (max-width: 880px) {
-      .hero { grid-template-columns: 1fr; }
-      .navlinks { display: none; }
-    }
-    @media (max-width:720px){
-      .placeholder-row, .text-box-row { flex-direction:column; }
-      .row { grid-template-columns:1fr; }
-      .about-photo { max-width: 100%; flex: 0 0 100%; }
-      .about-copy { flex: 0 0 100%; }
-    }
 
     /* Utility */
     .muted { color: var(--muted); }
@@ -331,42 +377,35 @@
         <p class="lead">Practical, one-to-one mentoring to help you find, finance and manage investment properties in New Zealand.</p>
       </div>
 
-      <!-- Conquering image will appear to the right of "Drive your own life" text -->
-      <!-- Family image will appear to the left of "Love Your Future" text -->
-      <div class="text-box-row" style="align-items:flex-start; gap:1rem; margin-bottom:1.5rem;">
-        <!-- Drive your own life (text) with conquering image to its right -->
-        <div style="flex:1 1 50%; display:flex; flex-direction:column; gap:0.8rem;">
-          <div class="text-box" id="drive-life-box">
-            <h3>Drive your own life.</h3>
-            <p>Take care of your family. If you have been carefully planning for your future, you’ll know that it’s very important to include property investment as one of your wealth strategies. Are you a person with a plan, but are concerned to avoid the risk of costly mistakes? You certainly are not alone finding that long term wealth creation is an area full of complex choices, risks and rewards.</p>
-            <p>This is why so many investors in New Zealand and around the world, choose to make direct property investment a key plank in their wealth portfolio. We get that - and are here to help you build a property portfolio to service your dreams.</p>
-          </div>
+      <!-- Paired row: Drive your own life (text) with conquering image to its right -->
+      <div class="paired-row" aria-hidden="false">
+        <div class="text-box" id="drive-life-box">
+          <h3>Drive your own life.</h3>
+          <p>Take care of your family. If you have been carefully planning for your future, you’ll know that it’s very important to include property investment as one of your wealth strategies. Are you a person with a plan, but are concerned to avoid the risk of costly mistakes? You certainly are not alone finding that long term wealth creation is an area full of complex choices, risks and rewards.</p>
+          <p>This is why so many investors in New Zealand and around the world, choose to make direct property investment a key plank in their wealth portfolio. We get that - and are here to help you build a property portfolio to service your dreams.</p>
         </div>
 
-        <figure class="image-placeholder" style="flex:0 0 320px; min-height:200px;">
-          <img src="conquering.png" alt="Conquering investment challenges" class="hero__image" loading="lazy" width="600" height="400" style="max-width:100%; height:auto; border-radius:6px;" onerror="this.onerror=null; this.src='placeholder_landscape.png'">
+        <figure class="image-placeholder" aria-hidden="false" style="padding:0.5rem;">
+          <img src="conquering.png" alt="Conquering investment challenges" class="hero__image" loading="lazy" width="600" height="400">
         </figure>
-
       </div>
 
-      <div class="text-box-row" style="align-items:flex-start; gap:1rem; margin-bottom:1.5rem;">
-        <!-- family image to the left -->
-        <figure class="image-placeholder" style="flex:0 0 320px; min-height:200px;">
-          <img src="family.png" alt="Family in front of a new investment property" class="hero__image" loading="lazy" width="600" height="400" style="max-width:100%; height:auto; border-radius:6px;" onerror="this.onerror=null; this.src='placeholder_landscape.png'">
+      <!-- Paired row: family image left, Love Your Future text right -->
+      <div class="paired-row" aria-hidden="false">
+        <figure class="image-placeholder" aria-hidden="false" style="padding:0.5rem;">
+          <img src="family.png" alt="Family in front of a new investment property" class="hero__image" loading="lazy" width="600" height="400">
         </figure>
 
-        <div style="flex:1 1 50%; display:flex; flex-direction:column; gap:0.8rem;">
-          <div class="text-box" id="love-future-box">
-            <h3>Love Your Future.</h3>
-            <p>It’s no accident so many high profile business people and property owners rely on professional and experienced advisors from a range of fields. Whether you are a first class yachtee, a ballerina, a medical intern, a forklift driver or a new mum, everyone needs advice they can take comfort from whilst they forge their own path.</p>
-            <p>Your own actions set your future, but with expert guidance, you will feel empowered and energised to make your money future bright - your way.</p>
-            <ul>
-              <li>Be Accountable</li>
-              <li>Step up your game</li>
-              <li>Network with like-minded driven people seeking real success</li>
-              <li>Build investing knowledge and firepower for future generations</li>
-            </ul>
-          </div>
+        <div class="text-box" id="love-future-box">
+          <h3>Love Your Future.</h3>
+          <p>It’s no accident so many high profile business people and property owners rely on professional and experienced advisors from a range of fields. Whether you are a first class yachtee, a ballerina, a medical intern, a forklift driver or a new mum, everyone needs advice they can take comfort from whilst they forge their own path.</p>
+          <p>Your own actions set your future, but with expert guidance, you will feel empowered and energised to make your money future bright - your way.</p>
+          <ul>
+            <li>Be Accountable</li>
+            <li>Step up your game</li>
+            <li>Network with like-minded driven people seeking real success</li>
+            <li>Build investing knowledge and firepower for future generations</li>
+          </ul>
         </div>
       </div>
 
@@ -388,7 +427,8 @@
       <!-- ABOUT: headshot + bio -->
       <div class="about-block card">
         <div class="about-photo" aria-hidden="false">
-          <img src="steve-starke-headshot.jpg" alt="Steve Starke headshot" loading="lazy" width="360" height="360" onerror="this.onerror=null; this.src='placeholder_headshot.png'">
+          <!-- Updated headshot markup: image is in main branch root as steve-starke-headshot.jpg -->
+          <img src="steve-starke-headshot.jpg" alt="Steve Starke headshot" loading="lazy" width="360" height="360">
         </div>
 
         <div class="about-copy">
@@ -498,7 +538,7 @@
   </footer>
 
   <script>
-  // Contact form config
+  // Contact form config (unchanged)
   const USE_FORMSPREE = true;
   const FORMSPREE_ENDPOINT = "https://formspree.io/f/xzzkkjwd";
 
@@ -508,7 +548,6 @@
     const err = document.getElementById('contactError');
 
     function validEmail(v){ return /.+@.+\..+/.test(v); }
-    // basic phone validation: digits, spaces, parentheses, + and - ; at least 7 chars
     function validPhone(v){ return /^[0-9()+\-\s]{7,}$/.test(v); }
 
     if (!form) return;
@@ -522,10 +561,8 @@
       }
 
       const data = Object.fromEntries(new FormData(form).entries());
-      // Honeypot
       if (data.website) { return; }
 
-      // Validate required fields: name, email, phone, message
       if (!data.name || !validEmail(data.email) || !data.message || !data.phone) {
         if (err) {
           err.textContent = 'Please fill name, a valid email, phone number and your message.';
@@ -534,7 +571,6 @@
         return;
       }
 
-      // Additional phone format validation with friendly message
       if (!validPhone(data.phone.trim())) {
         if (err) {
           err.textContent = 'Please enter a valid phone number (digits, spaces, +, -, parentheses; at least 7 characters).';
@@ -572,7 +608,7 @@
     });
   })();
 
-  // DYNAMIC anchor offset and improved smooth scrolling with accessibility
+  // Anchor offset & smooth scroll (unchanged from previous)
   (function () {
     const header = document.getElementById('site-header');
     const setOffset = () => {
@@ -587,7 +623,6 @@
     window.addEventListener('load', setOffset);
     setOffset();
 
-    // Respect prefers-reduced-motion
     const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -602,27 +637,20 @@
         const computedOffset = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--anchor-offset')) || 120;
         const top = target.getBoundingClientRect().top + window.scrollY - computedOffset;
 
-        // Smooth scroll (or instant if user prefers reduced motion)
         window.scrollTo({ top, behavior: reduced ? 'auto' : 'smooth' });
 
-        // Move keyboard focus to the target for accessibility
-        // Make it focusable temporarily
         const previousTabIndex = target.getAttribute('tabindex');
         const hadTabIndex = previousTabIndex !== null;
         if (!hadTabIndex) target.setAttribute('tabindex', '-1');
-        // Use preventScroll so the earlier scroll isn't overridden by focus
         try {
           target.focus({ preventScroll: true });
         } catch (err) {
           target.focus();
         }
-        // restore tabindex if none originally
         if (!hadTabIndex) {
-          // Remove after a short delay to allow screen readers to react
           setTimeout(() => target.removeAttribute('tabindex'), 1000);
         }
 
-        // Update URL hash without adding an extra history entry
         if (window.location.hash !== '#' + targetId) {
           history.replaceState(null, '', '#' + targetId);
         }
